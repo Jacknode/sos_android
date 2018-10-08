@@ -64,7 +64,11 @@ let webpackConfig = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
+    // externals: {
+    //   'vue': 'Vue',
+    //   'axios':'axios'
+    // },
   }
 }
 
@@ -89,5 +93,12 @@ module.exports = vuxLoader.merge(webpackConfig, {
         }
       }
     }
+  ]
+})
+
+module.exports=vuxLoader.merge(webpackConfig,{
+  plugins:[
+    {name: 'vux-ui'},
+    {name: 'less-theme', path: 'src/assets/style/theme.less'}
   ]
 })

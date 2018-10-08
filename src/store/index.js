@@ -1,7 +1,6 @@
 /**
  * Created by leibo on 2018/10/8.
  */
-import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
 import mutations from './mutations'
