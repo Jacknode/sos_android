@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <div class="leftIcon">
+      <div class="leftIcon" @click="goTopPage">
         <i></i>
       </div>
       <strong>设置</strong>
@@ -59,10 +59,8 @@
       }
     },
     methods: {
-      initData() {
-      },
-      search() {
-        this.initData()
+      goTopPage(){
+        this.$router.go(-1)
       }
     },
   }
@@ -78,7 +76,7 @@
     height: 80/@rem;
     background-color: #fff;
     border-bottom: 1px solid #ccc;
-    font-size: 32/@rem;
+    font-size: 30/@rem;
     line-height: 80/@rem;
     text-align: center;
   }
@@ -86,7 +84,7 @@
   .leftIcon {
     position: absolute;
     padding: 20/@rem;
-    top: 10/@rem;
+    top: 4/@rem;
     left: 10/@rem;
   }
 

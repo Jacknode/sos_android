@@ -58,54 +58,56 @@ left: 0; z-index: 1;width: 100%;">
     </div>
 
 
-    <swiper loop auto :list="swiperList" :index="swiperIndex" @on-index-change="demo06_onIndexChange"></swiper>
-    <div id="footer">
-      <swiper auto height="30px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
-        <swiper-item v-for="(item,index) in scrollingMessageList" :key="index"><p>{{item.sos_sm_Content}}</p>
-        </swiper-item>
-      </swiper>
-    </div>
-    <div class="sosWrap">
-      <div class="sosBox"></div>
-      <ul class="sosList">
-        <li class="userLogin">
-          <div>
-            <i></i>
-            <span>用户登录</span>
-          </div>
-        </li>
-        <li class="callThePolice">
-          <div>
-            <i></i>
-            <span>我要报警</span>
-          </div>
-        </li>
-        <li class="policeRecord">
-          <div>
-            <i></i>
-            <span>报警记录</span>
-          </div>
-        </li>
-        <li class="usershare">
-          <div>
-            <i></i>
-            <span>用户分享</span>
-          </div>
-        </li>
-        <li class="userFeedback">
-          <div>
-            <i></i>
-            <span>用户反馈</span>
-          </div>
-        </li>
-        <li class="updatePassword">
-          <div>
-            <i></i>
-            <span>修改密码</span>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <section>
+      <swiper loop auto :list="swiperList" :index="swiperIndex" @on-index-change="demo06_onIndexChange"></swiper>
+      <div id="footer">
+        <swiper auto height="30px" direction="vertical" :interval=2000 class="text-scroll" :show-dots="false">
+          <swiper-item v-for="(item,index) in scrollingMessageList" :key="index"><p>{{item.sos_sm_Content}}</p>
+          </swiper-item>
+        </swiper>
+      </div>
+      <div class="sosWrap">
+        <div class="sosBox"></div>
+        <ul class="sosList">
+          <li class="userLogin">
+            <div>
+              <i></i>
+              <span>用户登录</span>
+            </div>
+          </li>
+          <li class="callThePolice">
+            <div>
+              <i></i>
+              <span>我要报警</span>
+            </div>
+          </li>
+          <li class="policeRecord">
+            <div>
+              <i></i>
+              <span>报警记录</span>
+            </div>
+          </li>
+          <li class="usershare">
+            <div>
+              <i></i>
+              <span>用户分享</span>
+            </div>
+          </li>
+          <li class="userFeedback">
+            <div>
+              <i></i>
+              <span>用户反馈</span>
+            </div>
+          </li>
+          <li class="updatePassword">
+            <div>
+              <i></i>
+              <span>修改密码</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
     <div class="toUpdate" v-show="showToUpdate">
       <div class="toUpdateBox">
@@ -171,7 +173,7 @@ left: 0; z-index: 1;width: 100%;">
         this.$store.dispatch('initSwiperList', options)
       }
     },
-    mounted(){
+    mounted() {
       let s = document.querySelector('.vux-header-left');
       s.onclick = () => {
         this.show8 = true;
@@ -214,6 +216,16 @@ left: 0; z-index: 1;width: 100%;">
     text-align: center;
     line-height: 30px;
     color: #f60;
+  }
+
+  section {
+    position: fixed;
+    top: 60/@rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background-color: #fff;
   }
 
   .sosWrap {
