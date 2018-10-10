@@ -3,6 +3,7 @@
  */
 // 路由懒加载
 const getComponent = (name) => () => import(`../views/${name}.vue`);
+
 export default [{
 	path: '/',
 	name: 'Home',
