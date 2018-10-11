@@ -13,5 +13,20 @@ export default [
     path: '/settingPage',
     name: 'SettingPage',
     component: getComponent('SettingPage')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: getComponent('Login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: getComponent('Register')
+  },
+  {
+    path: '/forgetPassword',
+    name: 'ForgetPassword',
+    component: getComponent('ForgetPassword')
   }
 ]

@@ -45,7 +45,7 @@ left: 0; z-index: 1;width: 100%;">
               <i></i>
               <strong>检查更新</strong>
             </li>
-            <li class="setting clearfix">
+            <li class="setting clearfix" @click="goSetting">
               <i></i>
               <strong>设置</strong>
             </li>
@@ -69,7 +69,7 @@ left: 0; z-index: 1;width: 100%;">
       <div class="sosWrap">
         <div class="sosBox"></div>
         <ul class="sosList">
-          <li class="userLogin">
+          <li class="userLogin" @click="goLogin">
             <div>
               <i></i>
               <span>用户登录</span>
@@ -171,6 +171,14 @@ left: 0; z-index: 1;width: 100%;">
           "pcName": "",
         }
         this.$store.dispatch('initSwiperList', options)
+      },
+      //设置
+      goSetting(){
+        this.$router.push({name: 'SettingPage'})
+      },
+      //登录
+      goLogin(){
+        this.$router.push({name: 'Login'})
       }
     },
     mounted() {
