@@ -14,7 +14,7 @@
             <strong>{{item.sm_al_TypeName}}</strong>
             <div class="policeTime clearfix">
               <i></i>
-              <span>{{item.sm_al_CreateTime}}</span>
+              <span>{{item.sm_al_CreateTime | getUseTime}}</span>
             </div>
             <div class="policeAddress clearfix">
               <i></i>
@@ -24,6 +24,7 @@
             </div>
           </li>
         </ul>
+        <p v-show="!AlarmRecordUpCallbackList.length" style="text-align: center">暂无报警记录</p>
         <!--内容...-->
       </mescroll-vue>
 

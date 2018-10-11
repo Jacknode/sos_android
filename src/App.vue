@@ -42,11 +42,13 @@
       return {
         UpdateD: false,
         obj: {},
+        newUserInfo:{}
       }
     },
     watch:{
       '$route'(to,from){
-        if(!this.userInfo.sm_ui_ID){
+        if(!this.userInfo.sm_ui_ID&&this.newUserInfo){
+          console.log(1)
           this.$router.push({name:'Login'})
         }
       }
@@ -84,6 +86,10 @@
       },
     },
     mounted() {
+      this.newUserInfo = JSON.parse(localStorage.getItem('userInfo'))
+      if(this.newUserInfo){
+        this.$store.commit('setUserInfo',this.newUserInfo)
+      }
       var _this = this;
       mui.plusReady(function () {
         plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {

@@ -7,6 +7,12 @@ import { sync } from 'vuex-router-sync'
 import App from './App'
 import '@/assets/css/reset.css'
 
+import * as filters from './filters'
+
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+})
+
 
 FastClick.attach(document.body)
 
@@ -17,6 +23,7 @@ sync(store, router)
 /* eslint-disable no-new */
 new Vue({
 	router,
+  filters,
 	store,
 	render: h => h(App)
 }).$mount('#app-box')

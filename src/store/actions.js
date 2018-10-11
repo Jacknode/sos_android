@@ -76,6 +76,7 @@ export default {
       .then(data => {
         var data = data.data;
         if (Number(data.resultcode) == 200) {
+          localStorage.setItem('userInfo',JSON.stringify(data.data))
           commit('setUserInfo',data.data)
           relove(data.resultcontent);
         } else {
