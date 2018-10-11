@@ -49,5 +49,10 @@ export default [
     path: '/eWMShare',
     name: 'EWMShare',
     component: getComponent('EWMShare')
+  },
+  {
+    path: '/userFeedback',
+    name: 'UserFeedback',
+    component: getComponent('UserFeedback')
   }
 ]

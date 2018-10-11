@@ -93,7 +93,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <span>用户分享</span>
             </div>
           </li>
-          <li class="userFeedback">
+          <li class="userFeedback" @click="goUserFeedback">
             <div>
               <i></i>
               <span>用户反馈</span>
@@ -186,6 +186,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       //用户分享
       goUserShare(){
         this.$router.push({name: 'EWMShare'})
+      },
+      //用户反馈
+      goUserFeedback(){
+        this.$router.push({name: 'UserFeedback'})
       }
     },
     mounted() {

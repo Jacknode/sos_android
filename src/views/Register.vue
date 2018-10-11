@@ -208,7 +208,7 @@
   .registerPhone > div > input {
     float: left;
     width: 100%;
-    font-size: 20/@rem;
+    font-size: 25/@rem;
     padding: 15/@rem 20/@rem;
     line-height: 30/@rem;
   }
@@ -222,7 +222,7 @@
     float: left;
     width: 100%;
     border: none;
-    font-size: 20/@rem;
+    font-size: 25/@rem;
     line-height: 30/@rem;
     padding: 25/@rem 0 25/@rem 20/@rem;
     color: #333;
@@ -311,7 +311,7 @@
     float: left;
     width: 50%;
     border: none;
-    font-size: 20/@rem;
+    font-size: 25/@rem;
     line-height: 30/@rem;
     padding: 25/@rem 20/@rem 25/@rem 20/@rem;
     color: #333;

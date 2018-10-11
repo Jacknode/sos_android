@@ -134,7 +134,7 @@
     background: url("../assets/img/userCenter/loginNum.png") no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
-    margin-top: 25/@rem;
+    margin-top: 23/@rem;
   }
 
   .loginNum div {
@@ -146,7 +146,7 @@
     float: left;
     width: 100%;
     border: none;
-    font-size: 20/@rem;
+    font-size: 25/@rem;
     line-height: 30/@rem;
     padding: 25/@rem 0 25/@rem 20/@rem;
     color: #333;
@@ -159,7 +159,7 @@
     background: url("../assets/img/userCenter/Lock.png") no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
-    margin-top: 25/@rem;
+    margin-top: 23/@rem;
   }
 
   .loginPassword > div {
@@ -194,7 +194,7 @@
     width: 100%;
     background-color: #5c7eec;
     color: #fff;
-    font-size: 20/@rem;
+    font-size: 28/@rem;
     line-height: 60/@rem;
     -webkit-border-radius: 30/@rem;
     -moz-border-radius: 30/@rem;
@@ -208,7 +208,7 @@
   }
 
   .loginErr {
-    font-size: 20/@rem;
+    font-size: 22/@rem;
     line-height: 2;
   }
 
