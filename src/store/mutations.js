@@ -18,7 +18,7 @@ const mutations = {
   },
   setUserInfo(state,obj){
     state.userInfo = obj;
-  }
+  },
 };
 
 export default {

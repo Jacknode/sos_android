@@ -32,7 +32,7 @@ export default {
   //注册发送短信
   VerificationCode(store,data){
     return new Promise(function (relove, reject) {
-      axios.post(getNewStrHly + '/UserInfo/SosSendMessage', JSON.stringify(data), {
+      axios.post(getNewStr + '/UserInfo/SosSendMessage', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -78,6 +78,24 @@ export default {
         if (Number(data.resultcode) == 200) {
           commit('setUserInfo',data.data)
           relove(data.resultcontent);
+        } else {
+          reject(data.resultcontent)
+        }
+      })
+    })
+  },
+  //上拉加载报警信息
+  AlarmRecordUpCallback({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/Alarm/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(data => {
+        var data = data.data;
+        if (Number(data.resultcode) == 200) {
+          relove(data.data);
         } else {
           reject(data.resultcontent)
         }

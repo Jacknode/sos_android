@@ -132,7 +132,9 @@
           this.type = 'success';
           this.toastValue = suc
           this.showPositionValue = true;
-          this.$router.push({name: 'Login'})
+          setTimeout(()=>{
+            this.$router.push({name: 'Login'})
+          },1000)
         }, err => {
           this.type = 'warn';
           this.toastValue = err

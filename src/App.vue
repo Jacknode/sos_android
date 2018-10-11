@@ -27,17 +27,28 @@
 
 <script>
   import {getNewStrHly} from '@/assets/js/public'
+  import {mapGetters} from 'vuex'
 
   export default {
 //    directives: {
 //      TransferDom
 //    },
     components: {},
+    computed: mapGetters([
+      'userInfo'
+    ]),
     name: 'app',
     data() {
       return {
-        UpdateD: true,
+        UpdateD: false,
         obj: {},
+      }
+    },
+    watch:{
+      '$route'(to,from){
+        if(!this.userInfo.sm_ui_ID){
+          this.$router.push({name:'Login'})
+        }
       }
     },
     methods: {
@@ -73,7 +84,6 @@
       },
     },
     mounted() {
-
       var _this = this;
       mui.plusReady(function () {
         plus.runtime.getProperty(plus.runtime.appid, (wgtinfo) => {

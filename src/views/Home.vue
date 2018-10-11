@@ -11,9 +11,9 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       <popup v-model="show8" position="left" width="80%">
         <div class="position-horizontal-demo">
           <div class="titleBox">
-            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2323965838,1386432598&fm=27&gp=0.jpg"
+            <img :src="userInfo.sm_ui_HeadImage"
                  alt="" @click="goPersonalCenter">
-            <strong @click="goPersonalCenter">王庭容</strong>
+            <strong @click="goPersonalCenter">{{userInfo.sm_ui_Name}}</strong>
             <span>签到</span>
           </div>
           <ul class="serviceList">
@@ -50,7 +50,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <strong>设置</strong>
             </li>
             <li class="loginOut">
-              <span>退出登录</span>
+              <span @click="loginOut">退出登录</span>
             </li>
           </ul>
         </div>
@@ -140,7 +140,8 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     },
     computed: mapGetters([
       'swiperList',
-      'scrollingMessageList'
+      'scrollingMessageList',
+      'userInfo'
     ]),
     created() {
       //获取轮播图和滚动消息
@@ -176,6 +177,11 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       //报警记录
       goAlarmRecord(){
         this.$router.push({name: 'AlarmRecord'})
+      },
+      //退出登录
+      loginOut(){
+        this.$store.commit('setUserInfo',{})
+        window.location.reload()
       }
     },
     mounted() {

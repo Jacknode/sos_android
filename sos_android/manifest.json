@@ -135,5 +135,51 @@
                 }
             }
         }
-    }
+    },
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"static/js/vendor.aa191db0e4538f8a3668.js"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"static/js/3.c1cc14b0f78726ffe088.js",
+				"static/js/4.03d07e10b23117bbc73b.js",
+				"static/js/6.8085a9f8125c5b62827e.js",
+				"static/js/0.31659b150e3f4ad6bdd7.js",
+				"static/js/1.6164f6ea8e2428724995.js.map",
+				"static/img/register.2707358.png",
+				"static/img/ewm.f5a2e69.png",
+				"static/img/message.f960425.png",
+				"static/img/titleBg.bbe9f91.png",
+				"static/img/user.d5a84f5.png",
+				"static/js/0.31659b150e3f4ad6bdd7.js.map",
+				"static/css/app.b1c388e8631e735db5c299056cf79540.css.map",
+				"static/js/5.f6396ba2fa46f88d6867.js",
+				"static/img/loginBg.ca69878.png",
+				"static/css/app.b1c388e8631e735db5c299056cf79540.css",
+				"static/js/6.8085a9f8125c5b62827e.js.map",
+				"static/js/manifest.92fb92a91b3c5adb0448.js",
+				"static/js/4.03d07e10b23117bbc73b.js.map",
+				"static/js/manifest.92fb92a91b3c5adb0448.js.map",
+				"static/js/2.5dd77d90e04548376c55.js.map",
+				"static/js/5.f6396ba2fa46f88d6867.js.map",
+				"static/js/app.3de2a05a3c5dea04a0f2.js.map",
+				"static/js/2.5dd77d90e04548376c55.js",
+				"static/img/password.f575f87.png",
+				"static/img/cust.cef818f.png",
+				"static/js/3.c1cc14b0f78726ffe088.js.map",
+				"static/js/app.3de2a05a3c5dea04a0f2.js",
+				"static/js/1.6164f6ea8e2428724995.js",
+				"static/img/alarm.52a11ad.png",
+				"static/js/vendor.aa191db0e4538f8a3668.js.map",
+				"static/img/SOS.1cbf027.png"
+			]
+		}
+	}
 }

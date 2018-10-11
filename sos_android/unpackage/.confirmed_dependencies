@@ -1,1 +1,7 @@
-null
+{
+  "index.html": {
+    "resources": [
+      "static/js/vendor.aa191db0e4538f8a3668.js"
+    ]
+  }
+}
