@@ -69,7 +69,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       <div class="sosWrap">
         <div class="sosBox"></div>
         <ul class="sosList">
-          <li class="userLogin" @click="goLogin">
+          <li class="userLogin" @click="goHelpCenter">
             <div>
               <i></i>
               <span>帮助中心</span>
@@ -81,7 +81,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <span>我要报警</span>
             </div>
           </li>
-          <li class="policeRecord">
+          <li class="policeRecord" @click="goAlarmRecord">
             <div>
               <i></i>
               <span>报警记录</span>
@@ -166,13 +166,17 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
         this.$router.push({name: 'SettingPage'})
       },
       //登录
-      goLogin() {
-        this.$router.push({name: 'Login'})
+      goHelpCenter() {
+        this.$router.push({name: 'HelpCenter'})
       },
       //个人信息
       goPersonalCenter() {
         this.$router.push({name: 'PersonalCenter'})
       },
+      //报警记录
+      goAlarmRecord(){
+        this.$router.push({name: 'AlarmRecord'})
+      }
     },
     mounted() {
       let s = document.querySelector('.vux-header-left');

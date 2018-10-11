@@ -34,5 +34,15 @@ export default [
     path: '/personalCenter',
     name: 'PersonalCenter',
     component: getComponent('PersonalCenter')
+  },
+  {
+    path: '/alarmRecord',
+    name: 'AlarmRecord',
+    component: getComponent('AlarmRecord')
+  },
+  {
+    path: '/helpCenter',
+    name: 'HelpCenter',
+    component: getComponent('HelpCenter')
   }
 ]
