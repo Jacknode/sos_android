@@ -4,8 +4,15 @@
 // 路由懒加载
 const getComponent = (name) => () => import(`../views/${name}.vue`);
 
-export default [{
-	path: '/',
-	name: 'Home',
-	component: getComponent('Home')
-}]
+export default [
+  {
+    path: '/',
+    name: 'Home',
+    component: getComponent('Home')
+  },
+  {
+    path: '/settingPage',
+    name: 'SettingPage',
+    component: getComponent('SettingPage')
+  }
+]

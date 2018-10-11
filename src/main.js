@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import App from './App'
+import '@/assets/css/reset.css'
 
 
 FastClick.attach(document.body)
