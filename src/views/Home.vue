@@ -1,7 +1,7 @@
 <template>
   <div id="wrap">
     <x-header style="position: fixed; top: 0;
-left: 0; z-index: 1;width: 100%;">
+left: 0; z-index: 1;width: 100%; height: 44px;">
       <span>紧急救助</span>
       <x-icon slot="overwrite-left" type="navicon" size="35"
               style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
@@ -12,8 +12,8 @@ left: 0; z-index: 1;width: 100%;">
         <div class="position-horizontal-demo">
           <div class="titleBox">
             <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2323965838,1386432598&fm=27&gp=0.jpg"
-                 alt="">
-            <strong>王庭容</strong>
+                 alt="" @click="goPersonalCenter">
+            <strong @click="goPersonalCenter">王庭容</strong>
             <span>签到</span>
           </div>
           <ul class="serviceList">
@@ -72,7 +72,7 @@ left: 0; z-index: 1;width: 100%;">
           <li class="userLogin" @click="goLogin">
             <div>
               <i></i>
-              <span>用户登录</span>
+              <span>个人中心</span>
             </div>
           </li>
           <li class="callThePolice">
@@ -173,13 +173,17 @@ left: 0; z-index: 1;width: 100%;">
         this.$store.dispatch('initSwiperList', options)
       },
       //设置
-      goSetting(){
+      goSetting() {
         this.$router.push({name: 'SettingPage'})
       },
       //登录
-      goLogin(){
+      goLogin() {
         this.$router.push({name: 'Login'})
-      }
+      },
+      //个人信息
+      goPersonalCenter() {
+        this.$router.push({name: 'PersonalCenter'})
+      },
     },
     mounted() {
       let s = document.querySelector('.vux-header-left');
@@ -228,11 +232,12 @@ left: 0; z-index: 1;width: 100%;">
 
   section {
     position: fixed;
-    top: 60/@rem;
+    top: 44px;
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: #fff;
   }
 
@@ -476,7 +481,7 @@ left: 0; z-index: 1;width: 100%;">
     left: 0;
     bottom: 0;
     right: 0;
-    font-size: 20/@rem;
+    font-size: 24/@rem;
     line-height: 46/@rem;
     color: #333;
   }

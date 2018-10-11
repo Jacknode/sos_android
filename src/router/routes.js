@@ -28,5 +28,10 @@ export default [
     path: '/forgetPassword',
     name: 'ForgetPassword',
     component: getComponent('ForgetPassword')
+  },
+  {
+    path: '/personalCenter',
+    name: 'PersonalCenter',
+    component: getComponent('PersonalCenter')
   }
 ]
