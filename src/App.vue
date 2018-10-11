@@ -47,8 +47,7 @@
     },
     watch:{
       '$route'(to,from){
-        if(!this.userInfo.sm_ui_ID&&this.newUserInfo){
-          console.log(1)
+        if(!this.userInfo.sm_ui_ID){
           this.$router.push({name:'Login'})
         }
       }

@@ -181,7 +181,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       //退出登录
       loginOut() {
         this.$store.commit('setUserInfo', {})
-        window.location.reload()
+        localStorage.removeItem('userInfo')
+       setTimeout(()=>{
+         window.location.reload()
+       },100)
       },
       //用户分享
       goUserShare(){
