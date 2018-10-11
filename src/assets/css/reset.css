@@ -110,6 +110,11 @@ body {
 
 * {
   box-sizing: border-box;
+
+}
+span,
+strong,
+p{
   font-family: "微软雅黑";
 }
 p{

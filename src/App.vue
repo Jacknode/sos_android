@@ -110,7 +110,7 @@
 </script>
 
 <style lang="less" type="text/less">
-  @rem:30rem;
+  @rem:25rem;
   .toUpdateWrap {
     position: fixed;
     top: 0;
@@ -202,7 +202,9 @@
     border-radius: 0 0 20/@rem 20/@rem;
   }
   .aboutEdition {
-    font: bold 0.93@rem/1.66rem "微软雅黑";
+    font-size: 28/@rem;
+    line-height: 50/@rem;
+    font-weight: bold;
     color: #333;
   }
 
@@ -211,7 +213,8 @@
   }
   .newContent {
     margin-top: 20/@rem;
-    font: bold 0.93@rem/1.66rem "微软雅黑";
+    font-size: 28/@rem;
+    line-height: 50/@rem;
     color: #666;
   }
 

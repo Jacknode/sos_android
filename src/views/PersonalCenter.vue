@@ -135,7 +135,7 @@
   .personalInfoTop {
     padding-top: 20/@rem;
     background-color: #fff;
-    margin-bottom: 16/@rem;
+    margin-bottom: 12/@rem;
   }
 
   .headerImg {
