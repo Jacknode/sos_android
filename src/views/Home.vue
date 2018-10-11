@@ -109,18 +109,7 @@ left: 0; z-index: 1;width: 100%;">
       </div>
     </section>
 
-    <div class="toUpdate" v-show="showToUpdate">
-      <div class="toUpdateBox">
-        <span>监测到更新</span>
-        <span>监测到更新</span>
-        <span>监测到更新</span>
-        <span>监测到更新</span>
-        <div class="clearfix">
-          <span>取消</span>
-          <span>更新</span>
-        </div>
-      </div>
-    </div>
+
 
 
   </div>
@@ -137,7 +126,7 @@ left: 0; z-index: 1;width: 100%;">
     data() {
       return {
         swiperIndex: 0,
-        showToUpdate: false,
+        showToUpdate: true,
         show8: false,
         isShowNav: false,
         drawerVisibility: false
@@ -350,53 +339,7 @@ left: 0; z-index: 1;width: 100%;">
     top: 15%;
   }
 
-  .toUpdate {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .5);
-    z-index: 2;
-  }
 
-  .toUpdateBox {
-    width: 70%;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    padding-top: 9.6666rem;
-    margin: 10rem auto;
-    background: url("../assets/img/appupdate.png") no-repeat;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-  }
-
-  .toUpdateBox > span {
-    display: block;
-    text-align: center;
-    font: 16px/1.3 "微软雅黑";
-    color: #666;
-    padding: 0 2rem;
-  }
-
-  .toUpdateBox > div {
-    margin-top: 10px;
-    border-top: 1px solid #f0f0f0;
-    font: 20px/2 "微软雅黑";
-    color: #1196db;
-  }
-
-  .toUpdateBox > div > span {
-    float: left;
-    width: 50%;
-    text-align: center;
-  }
-
-  .toUpdateBox > div > span:nth-of-type(1) {
-    border-right: 1px solid #f0f0f0;
-    color: #ccc;
-  }
 
   #footer {
     border-bottom: .5rem solid #f0f0f0;
