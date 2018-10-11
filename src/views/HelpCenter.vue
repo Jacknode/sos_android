@@ -7,7 +7,12 @@
       <strong>帮助中心</strong>
     </header>
     <section>
-
+      <div class="helpList">
+        <div v-for="item,index in helpList" class="clearfix">
+          <span>{{item.value}}</span>
+          <i></i>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -22,7 +27,27 @@
     computed: mapGetters([]),
     data() {
       return {
-        value: false
+        helpList: [
+          {
+            value: '1、台州110报警APP下载方式'
+          },
+          {
+            value: '2、用户注册'
+          },
+          {
+            value: '3、报警方式'
+          },
+          {
+            value: '4、报警后'
+          },
+          {
+            value: '5、已处理出警'
+          },
+          {
+            value: '6、查看报警记录'
+          },
+
+        ],
       }
     },
     methods: {
@@ -50,7 +75,6 @@
     font-size: 30/@rem;
     line-height: 80/@rem;
     text-align: center;
-    box-shadow: 0 10px #ccc;
   }
 
   .leftIcon {
@@ -78,7 +102,37 @@
     background-color: #f6f6f6;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 20/@rem;
+  }
+
+  section > div {
+    background-color: #fff;
+    margin-top: 20/@rem;
+    padding: 0 20/@rem;
+    font-size: 25/@rem;
+    line-height: 90/@rem;
+  }
+
+  .helpList div {
+    border-bottom: 1px solid #edeeef;
+    color: #2e2e2e;
+  }
+
+  .helpList div:last-of-type {
+    border-bottom: none;
+  }
+
+  .helpList span {
+    float: left;
+  }
+
+  .helpList i {
+    float: right;
+    width: 18/@rem;
+    height: 27/@rem;
+    background: url("../assets/img/setting/rightIcon.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    margin-top: 30/@rem;
   }
 
 </style>

@@ -44,5 +44,10 @@ export default [
     path: '/helpCenter',
     name: 'HelpCenter',
     component: getComponent('HelpCenter')
+  },
+  {
+    path: '/eWMShare',
+    name: 'EWMShare',
+    component: getComponent('EWMShare')
   }
 ]

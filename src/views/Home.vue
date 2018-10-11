@@ -87,7 +87,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <span>报警记录</span>
             </div>
           </li>
-          <li class="usershare">
+          <li class="usershare" @click="goUserShare">
             <div>
               <i></i>
               <span>用户分享</span>
@@ -179,9 +179,13 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
         this.$router.push({name: 'AlarmRecord'})
       },
       //退出登录
-      loginOut(){
-        this.$store.commit('setUserInfo',{})
+      loginOut() {
+        this.$store.commit('setUserInfo', {})
         window.location.reload()
+      },
+      //用户分享
+      goUserShare(){
+        this.$router.push({name: 'EWMShare'})
       }
     },
     mounted() {
