@@ -72,7 +72,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
           <li class="userLogin" @click="goLogin">
             <div>
               <i></i>
-              <span>个人中心</span>
+              <span>帮助中心</span>
             </div>
           </li>
           <li class="callThePolice">

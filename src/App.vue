@@ -225,7 +225,7 @@
   .toUpdateContent > a {
     display: block;
     margin-top: 50/@rem;
-    background-color: #f8921a;
+    background-color: #5e9fff;
     color: #ffffff;
     font: 1rem/2.66rem "微软雅黑";
     text-align: center;
