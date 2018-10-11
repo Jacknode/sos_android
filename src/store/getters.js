@@ -4,5 +4,6 @@
 export default {
   swiperList: state => state.swiperList,
   scrollingMessageList: state => state.scrollingMessageList,
+  userInfo: state => state.userInfo,
 }
 

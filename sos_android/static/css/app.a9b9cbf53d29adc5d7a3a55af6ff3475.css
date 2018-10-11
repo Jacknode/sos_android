@@ -20,6 +20,7 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
@@ -83,6 +84,7 @@ body {
 }
 
 /*margin-top*/
+
 .mt10 {
   margin-top: 10px;
 }
@@ -104,14 +106,16 @@ body {
 }
 
 /*padding-left*/
+
 .pl15 {
   padding-left: 15px;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "微软雅黑";
+  font-family: "\5FAE\8F6F\96C5\9ED1";
 }
+
 p{
   box-sizing: content-box;
 }
@@ -124,3 +128,5 @@ input {
 img {
   vertical-align: top;
 }
+
+/*# sourceMappingURL=app.a9b9cbf53d29adc5d7a3a55af6ff3475.css.map*/
