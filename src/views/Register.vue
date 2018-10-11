@@ -9,14 +9,14 @@
         <div class="registerPhone clearfix">
           <span>+86</span>
           <div>
-            <input type="text" placeholder="手机号">
+            <input type="text" placeholder="手机号" v-model="register.phone">
           </div>
         </div>
         <div class="loginPassword clearfix">
           <i></i>
           <div>
             <div>
-              <input type="password" placeholder="请输入密码">
+              <input type="password" placeholder="请输入密码" v-model="register.password">
               <i></i>
             </div>
           </div>
@@ -25,26 +25,120 @@
           <i></i>
           <div class="clearfix">
             <div>
-              <input type="text" placeholder="请输入验证码">
-              <span>验证码</span>
+              <input type="text" placeholder="请输入验证码" v-model="register.validateNo">
+              <span @click="VerificationCode" v-show="isVerificationCode">{{VerificationCodeValue}}</span>
+              <span v-show="isNum" style="background: #bbb;color: #fff">{{num}}</span>
             </div>
           </div>
         </div>
-        <a href="javascript:;">确定</a>
+        <a href="javascript:;" @click="submit">确定</a>
         <p>已有账号?<a href="javascript:;" @click="goLogin">登录</a></p>
       </section>
     </div>
+    <toast v-model="showPositionValue" :type="type" :time="800" is-show-mask position="middle">{{toastValue}}</toast>
   </div>
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import {Toast} from 'vux'
 
   export default {
     computed: mapGetters([]),
+    components: {
+      Toast
+    },
     data() {
-      return {}
+      return {
+        VerificationCodeValue: '验证码',
+        isVerificationCode: true,
+        isNum: false,
+        num: 60,
+        type: 'warn',
+        timer: null,
+        toastValue: '手机号不能为空！',
+        showPositionValue: false,
+        register: {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "phone": "",
+          "extensionID": "",
+          "password": "",
+          "validateNo": "",//验证码
+        }
+      }
+    },
+    watch: {
+      num(){
+        if (this.num == 0) {
+          clearInterval(this.timer)
+          this.VerificationCodeValue = '重新发送验证码'
+          this.isVerificationCode = true;
+          this.isNum = false;
+        }
+      }
     },
     methods: {
+      //点击验证码
+      VerificationCode(){
+        if (!this.register.phone) {
+          this.showPositionValue = true;
+          return
+        }
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "phone": this.register.phone,//用户编码
+          "sendType": "0",//0注册发送短信 1 找回密码发送短信 2 动态密码
+        };
+        this.$store.dispatch('VerificationCode', options)
+        .then((data) => {
+          //弹窗设置
+          this.type = 'success';
+          this.toastValue = data
+          this.showPositionValue = true;
+
+          //设置倒计时
+          this.isVerificationCode = false;
+          this.isNum = true
+
+          clearInterval(this.timer)
+          this.timer = setInterval(() => {
+            this.num--;
+          }, 1000);
+        }, err => {
+          this.type = 'warn';
+          this.toastValue = err
+          this.showPositionValue = true;
+        })
+      },
+      //提交
+      submit(){
+        if (!this.register.validateNo) {
+          this.toastValue = '验证码不能为空'
+          this.showPositionValue = true;
+          return
+        }
+        if (!this.register.password) {
+          this.toastValue = '密码不能为空'
+          this.showPositionValue = true;
+          return
+        }
+        this.$store.dispatch('registerSubmit',this.register)
+        .then((suc)=>{
+          //弹窗设置
+          this.type = 'success';
+          this.toastValue = suc
+          this.showPositionValue = true;
+          this.$router.push({name: 'Login'})
+        }, err => {
+          this.type = 'warn';
+          this.toastValue = err
+          this.showPositionValue = true;
+        })
+      },
       goLogin(){
         this.$router.push({name: 'Login'})
       },
@@ -56,7 +150,7 @@
     },
   }
 </script>
-<style scoped lang="less">
+<style scoped lang="less" type="text/less">
   @rem: 20rem;
 
   input {
@@ -258,7 +352,7 @@
     margin-top: 20/@rem;
   }
 
-  section>p > a {
+  section > p > a {
     display: inline;
     color: #5c7eec;
     margin-left: 10/@rem;

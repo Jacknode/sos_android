@@ -6,39 +6,93 @@
         <div class="loginNum clearfix">
           <i></i>
           <div>
-            <input type="text" placeholder="请输入账号/手机号">
+            <input type="text" placeholder="请输入账号/手机号" v-model="options.userID">
           </div>
         </div>
         <div class="loginPassword clearfix">
           <i></i>
           <div>
             <div>
-              <input type="password" placeholder="请输入密码">
-              <i></i>
+              <input :type="typeV" placeholder="请输入密码" v-model="options.password">
+              <i @click="look"></i>
             </div>
           </div>
         </div>
-        <a href="javascript:;">登录</a>
+        <a href="javascript:;" @click="login">登录</a>
       </div>
       <div class="loginErr clearfix">
         <a href="javascript:;" @click="goRegister">注册</a>
-        <a href="javascript:;" @click="goForgetPassword">忘记密码?</a>
+        <!--<a href="javascript:;" @click="goForgetPassword">忘记密码?</a>-->
       </div>
     </section>
+    <toast v-model="showPositionValue" :type="type" :time="800" is-show-mask position="middle">{{toastValue}}</toast>
+    <toast v-model="showSuccess" type="success"  is-show-mask position="middle">登录成功</toast>
   </div>
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import {Toast} from 'vux'
 
   export default {
     computed: mapGetters([]),
+    components: {
+      Toast
+    },
     data() {
-      return {}
+      return {
+        typeV:'password',
+        toastValue: '手机号不能为空！',
+        type: 'warn',
+        showSuccess:false,
+        showPositionValue: false,
+        options:{
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "token": "",
+          "userID": "",//用户编码
+          "password": ""//密码
+        }
+      }
     },
     methods: {
+      //眼睛
+      look(){
+        if(this.typeV== 'text'){
+          this.typeV= 'password'
+        }else{
+          this.typeV= 'text'
+        }
+      },
       //注册
       goRegister() {
         this.$router.push({name: 'Register'})
+      },
+      //登录
+      login(){
+        if (!this.options.userID) {
+          this.showPositionValue = true;
+          return
+        }
+        if (!this.options.password) {
+          this.toastValue = '密码不能为空'
+          this.showPositionValue = true;
+          return
+        }
+        this.$store.dispatch('loginSubmit',this.options)
+        .then((suc)=>{
+          //弹窗设置
+          this.showSuccess = true;
+          setTimeout(()=>{
+            this.$router.push({name: 'Home'})
+          },1000)
+        }, err => {
+          this.type = 'warn';
+          this.toastValue = err
+          this.showPositionValue = true;
+        })
       },
       //忘记密码
       goForgetPassword(){
@@ -52,7 +106,7 @@
     },
   }
 </script>
-<style scoped lang="less">
+<style scoped lang="less" type="text/less">
   @rem: 20rem;
 
   header {

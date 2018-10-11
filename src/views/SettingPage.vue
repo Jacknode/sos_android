@@ -65,7 +65,7 @@
     },
   }
 </script>
-<style scoped lang="less">
+<style scoped lang="less" type="text/less">
   @rem: 20rem;
 
   header {

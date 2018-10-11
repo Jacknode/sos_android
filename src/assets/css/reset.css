@@ -112,8 +112,7 @@ body {
   box-sizing: border-box;
   font-family: "微软雅黑";
 }
-
-p {
+p{
   box-sizing: content-box;
 }
 
