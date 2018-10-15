@@ -17,19 +17,19 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
             <span>签到</span>
           </div>
           <ul class="serviceList">
-            <li class="alarmRecord clearfix">
+            <li class="alarmRecord clearfix" @click="goAlarmRecord">
               <i></i>
               <strong>报警记录</strong>
             </li>
-            <li class="emergencyContact clearfix">
+            <li class="emergencyContact clearfix" @click="goUrgentContacts">
               <i></i>
               <strong>紧急联系人</strong>
             </li>
-            <li class="myGuardian clearfix">
+            <li class="myGuardian clearfix" @click="goMyGuardian">
               <i></i>
               <strong>我守护的人</strong>
             </li>
-            <li class="userFeedback1 clearfix">
+            <li class="userFeedback1 clearfix" @click="goUserFeedback">
               <i></i>
               <strong>用户反馈</strong>
             </li>
@@ -37,7 +37,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <i></i>
               <strong>推荐给朋友</strong>
             </li>
-            <li class="ewmShare clearfix">
+            <li class="ewmShare clearfix" @click="goUserShare">
               <i></i>
               <strong>二维码分享</strong>
             </li>
@@ -87,10 +87,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <span>报警记录</span>
             </div>
           </li>
-          <li class="usershare" @click="goUserShare">
+          <li class="usershare">
             <div>
               <i></i>
-              <span>用户分享</span>
+              <span>推荐给朋友</span>
             </div>
           </li>
           <li class="userFeedback" @click="goUserFeedback">
@@ -193,6 +193,14 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       //用户反馈
       goUserFeedback(){
         this.$router.push({name: 'UserFeedback'})
+      },
+      //我的守护人
+      goMyGuardian(){
+        this.$router.push({name: 'MyGuardian'})
+      },
+      //紧急联系人
+      goUrgentContacts(){
+        this.$router.push({name: 'UrgentContacts'})
       }
     },
     mounted() {
@@ -310,7 +318,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
   }
 
   .usershare i {
-    background: url("../assets/img/ewm.png") no-repeat;
+    background: url("../assets/img/recommendFriend.png") no-repeat;
 
   }
 

@@ -4,12 +4,17 @@
       <div class="leftIcon" @click="goTopPage">
         <i></i>
       </div>
-      <strong>帮助中心</strong>
+      <strong>分享APP</strong>
     </header>
     <section>
       <div class="ewmBox">
         <div>
-          <img src="../assets/img/ewmImg.png" alt="">
+          <div>
+            <qrcode
+              :size="137"
+              value="http://qiankevideo.oss-cn-hangzhou.aliyuncs.com/20181011/41489ed32d9b45a2b577abc8d12b8cee.apk"
+              type="img"></qrcode>
+          </div>
         </div>
         <p>扫描二维码下载APP</p>
       </div>
@@ -19,8 +24,10 @@
 <script>
   import {mapGetters} from 'vuex'
 
+  import {Qrcode} from 'vux'
+
   export default {
-    components: {},
+    components: {Qrcode},
     computed: mapGetters([]),
     data() {
       return {}
@@ -63,8 +70,8 @@
     width: 32/@rem;
     height: 31/@rem;
     background: url("../assets/img/setting/goback.png") no-repeat;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
   }
 
   section {
@@ -86,27 +93,30 @@
     width: 260/@rem;
   }
 
-  .ewmBox div {
+  .ewmBox > div {
     padding: 20/@rem;
     height: 260/@rem;
+    width: 260/@rem;
     background: url("../assets/img/ewmBox.png") no-repeat;
-    -webkit-background-size:  100% 100%;
-    background-size:  100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
     margin-bottom: 20/@rem;
+    position: relative;
   }
 
-  .ewmBox div img {
-    width: 100%;
-    height: 100%;
+  .ewmBox > div > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .ewmBox p {
-    font-size: 28/@rem;
+    font-size: 23/@rem;
     color: #fff;
-    font-weight: bold;
     font-family: "宋体";
-    font-style: italic;
     text-align: center;
+    color: #3593be;
   }
 
 </style>

@@ -102,5 +102,23 @@ export default {
         }
       })
     })
-  }
+  },
+  //用户反馈
+  feedbackSubmit({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/CustomerFeedBack/Insert', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.resultcontent);
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
 }

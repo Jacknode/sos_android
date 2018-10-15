@@ -35,7 +35,7 @@
       <div class="helpCenter clearfix">
         <i></i>
         <div>
-          <div>
+          <div @click="goHelpCenter">
             <strong>帮助中心</strong>
             <span></span>
           </div>
@@ -61,6 +61,9 @@
     methods: {
       goTopPage(){
         this.$router.go(-1)
+      },
+      goHelpCenter(){
+        this.$router.push({name:'HelpCenter'})
       }
     },
   }

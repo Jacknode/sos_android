@@ -75,6 +75,8 @@
     font-size: 30/@rem;
     line-height: 80/@rem;
     text-align: center;
+    z-index: 2;
+    box-shadow: 0 5px 10px #ccc;
   }
 
   .leftIcon {
@@ -108,7 +110,7 @@
     background-color: #fff;
     margin-top: 20/@rem;
     padding: 0 20/@rem;
-    font-size: 25/@rem;
+    font-size: 26/@rem;
     line-height: 90/@rem;
   }
 

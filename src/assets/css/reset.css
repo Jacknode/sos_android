@@ -112,20 +112,33 @@ body {
   box-sizing: border-box;
 
 }
+
 span,
 strong,
-p{
+p {
   font-family: "微软雅黑";
 }
-p{
+
+p {
   box-sizing: content-box;
 }
 
 button,
 input {
   outline: none;
+  border: none;
+  padding: 0;
+  background-color: transparent;
 }
 
 img {
   vertical-align: top;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  background-color: transparent;
 }

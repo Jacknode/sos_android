@@ -24,9 +24,9 @@
             </div>
           </li>
         </ul>
-        <p v-show="!AlarmRecordUpCallbackList.length" style="text-align: center">暂无报警记录</p>
         <!--内容...-->
       </mescroll-vue>
+      <img src="../assets/img/policeListBg.png" class="imgBg" v-show="!AlarmRecordUpCallbackList.length" alt="">
 
     <!--</section>-->
   </div>
@@ -136,6 +136,14 @@
     border: none;
   }
 
+  .imgBg  {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+  }
+
   header {
     position: fixed;
     top: 0;
@@ -147,6 +155,8 @@
     font-size: 30/@rem;
     line-height: 80/@rem;
     text-align: center;
+    z-index: 2;
+    box-shadow: 0 5px 10px #ccc;
   }
 
   .leftIcon {
