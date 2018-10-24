@@ -88,5 +88,11 @@ export default [
     path: '/addUrgentContacts',
     name: 'AddUrgentContacts',
     component: getComponent('AddUrgentContacts')
+  },
+  //SOS地图
+  {
+    path: '/sOSMap',
+    name: 'SOSMap',
+    component: getComponent('SOSMap')
   }
 ]
