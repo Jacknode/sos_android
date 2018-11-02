@@ -26,7 +26,7 @@
             <div class="clearfix">
               <strong>开启报警后录音上传</strong>
               <span>
-                <inline-x-switch v-model="value"></inline-x-switch>
+                <inline-x-switch v-model="value1"></inline-x-switch>
               </span>
             </div>
           </div>
@@ -55,7 +55,8 @@
     computed: mapGetters([]),
     data() {
       return {
-        value: false
+        value: false,
+        value1: false
       }
     },
     methods: {

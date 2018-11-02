@@ -25,3 +25,12 @@ export const getUseTime = val=>{
   }
 };
 
+//接警处理状态
+export const getDealAlarm = (val)=>{
+  switch (val){
+    case 0 : return '未处理';
+    case 1 : return '处理中';
+    case 2 : return '处理完毕';
+  };
+};
+

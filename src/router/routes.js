@@ -17,6 +17,18 @@ export default [
     name: 'SettingPage',
     component: getComponent('SettingPage')
   },
+  //我的位置
+  {
+    path: '/myLocation',
+    name: 'MyLocation',
+    component: getComponent('MyLocation')
+  },
+  //内部通告
+  {
+    path: '/notice',
+    name: 'Notice',
+    component: getComponent('Notice')
+  },
   //登录
   {
     path: '/login',
@@ -34,6 +46,18 @@ export default [
     path: '/forgetPassword',
     name: 'ForgetPassword',
     component: getComponent('ForgetPassword')
+  },
+  //修改密码
+  {
+    path: '/changePassword',
+    name: 'ChangePassword',
+    component: getComponent('ChangePassword')
+  },
+  //下载
+  {
+    path: '/downLoad',
+    name: 'DownLoad',
+    component: getComponent('DownLoad')
   },
   //个人信息
   {

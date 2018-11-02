@@ -8,25 +8,36 @@
     </header>
     <section>
       <div class="helpList">
-        <div v-for="item,index in helpList" class="clearfix">
-          <span>{{item.value}}</span>
+        <div v-for="item,index in searchUserBookList" @click="helpDetail(item)" class="clearfix">
+          <span>{{item.sos_um_Title}}</span>
           <i></i>
         </div>
       </div>
     </section>
+    <div v-show="contentIsShow" class="contentDetail">
+      <div class="boxTop">
+        <div class="goBack" @click="goBack"></div>
+      </div>
+      <div class="detailContent">{{detailContent}}</div>
+      <img class="detailContentImg" :src="detailContentImg" v-lazy="detailContentImg" alt="" width="100%" >
+    </div>
   </div>
 </template>
 <script>
   import {mapGetters} from 'vuex'
   import {InlineXSwitch} from 'vux'
-
   export default {
     components: {
       InlineXSwitch
     },
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'searchUserBookList',
+    ]),
     data() {
       return {
+        detailContent:'',
+        detailContentImg:'',
+        contentIsShow:false,
         helpList: [
           {
             value: '1、台州110报警APP下载方式'
@@ -50,15 +61,80 @@
         ],
       }
     },
+    created(){
+      this.searchUserBook();
+    },
     methods: {
+      //返回上一层
+      goBack(){
+        this.contentIsShow=false;
+      },
+      //查询用户手册
+      searchUserBook(){
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sos_um_ID": "",//用户手册ID
+          "page": 1,//页码
+          "rows": 10//条数
+        };
+        this.$store.dispatch("searchUserBook",options)
+          .then();
+      },
+      //去顶页
       goTopPage() {
         this.$router.go(-1)
-      }
+      },
+      //用户详情
+      helpDetail(item){
+        this.detailContent='';
+        this.detailContentImg='';
+        this.detailConten=item.sos_um_Content;
+        this.detailContentImg=item.sos_um_ImgUrl;
+        this.contentIsShow=true;
+      },
     },
   }
 </script>
 <style scoped lang="less" type="text/less">
   @rem: 20rem;
+
+  .goBack{
+    width: 25/@rem;
+    height: 25/@rem;
+    transform: rotate(45deg);
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+  }
+
+  .boxTop{
+    padding: 25/@rem;
+    background-color: #2e9bff;
+    height: 80/@rem;
+    width: 100%;
+  }
+
+  .detailContent{
+
+  }
+
+  .detailContentImg{
+
+  }
+
+  .contentDetail{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0 ;
+    bottom: 0;
+    z-index: 10;
+    background-color: white;
+    overflow: scroll;
+  }
 
   input {
     border: none;

@@ -6,7 +6,12 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       <x-icon slot="overwrite-left" type="navicon" size="35"
               style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
     </x-header>
-
+    <!--特殊接警状态-->
+    <img v-show="specialAlarmIsTrue" class="specialAlarm" src="../assets/img/home/reds00.png" height="100" width="100"/>
+    <img v-show="specialAlarmIsTrue1" class="specialAlarm" src="../assets/img/home/blues00.png" height="100" width="100"/>
+    <!--一般接警状态-->
+    <img  v-show="generalAlarmIsTrue" class="generalAlarm" src="../assets/img/home/red00.png" />
+    <img  v-show="generalAlarmIsTrue1" class="generalAlarm" src="../assets/img/home/blue00.png" />blue00
     <div v-transfer-dom>
       <popup v-model="show8" position="left" width="80%">
         <div class="position-horizontal-demo">
@@ -14,13 +19,17 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
             <img :src="userInfo.sm_ui_HeadImage"
                  alt="" @click="goPersonalCenter">
             <strong @click="goPersonalCenter">{{userInfo.sm_ui_Name}}</strong>
-            <span>签到</span>
+            <span :class="{active:signInActive==gignInName}" @click="signIn">{{gignInName}}</span>
           </div>
           <ul class="serviceList">
-            <li class="alarmRecord clearfix" @click="goAlarmRecord">
+            <li class="ewmShare clearfix" @click="goNotice">
+              <i></i>
+              <strong >内部通告</strong>
+            </li>
+<!--            <li class="alarmRecord clearfix" @click="goAlarmRecord">
               <i></i>
               <strong>报警记录</strong>
-            </li>
+            </li>-->
             <li class="emergencyContact clearfix" @click="goUrgentContacts">
               <i></i>
               <strong>紧急联系人</strong>
@@ -29,21 +38,21 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <i></i>
               <strong>我守护的人</strong>
             </li>
-            <li class="userFeedback1 clearfix" @click="goUserFeedback">
+<!--            <li class="userFeedback1 clearfix" @click="goUserFeedback">
               <i></i>
               <strong>用户反馈</strong>
-            </li>
-            <li class="recommendedFriends clearfix">
+            </li>-->
+<!--            <li class="recommendedFriends clearfix">
               <i></i>
               <strong>推荐给朋友</strong>
-            </li>
-            <li class="ewmShare clearfix" @click="goUserShare">
-              <i></i>
-              <strong>二维码分享</strong>
-            </li>
-            <li class="checkUpdate clearfix">
+            </li>-->
+<!--            <li class="checkUpdate clearfix">
               <i></i>
               <strong>检查更新</strong>
+            </li>-->
+            <li class="alarmNeeds clearfix" @click="alarmNeeds">
+              <i></i>
+              <strong>报警须知</strong>
             </li>
             <li class="setting clearfix" @click="goSetting">
               <i></i>
@@ -67,18 +76,18 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
         </swiper>
       </div>
       <div class="sosWrap">
-        <div class="sosBox"></div>
+        <div class="sosBox" @click="ClickSOS"></div>
         <ul class="sosList">
-          <li class="userLogin" @click="goHelpCenter">
+          <li class="userLogin" @click="goMyLocation">
             <div>
               <i></i>
-              <span>帮助中心</span>
+              <span>我的位置</span>
             </div>
           </li>
           <li class="callThePolice">
             <div>
               <i></i>
-              <span>我要报警</span>
+              <span @click="confirmWindow" >我要报警</span>
             </div>
           </li>
           <li class="policeRecord" @click="goAlarmRecord">
@@ -90,7 +99,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
           <li class="usershare">
             <div>
               <i></i>
-              <span>推荐给朋友</span>
+              <span  @click="goUserShare">用户分享</span>
             </div>
           </li>
           <li class="userFeedback" @click="goUserFeedback">
@@ -99,7 +108,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <span>用户反馈</span>
             </div>
           </li>
-          <li class="updatePassword">
+          <li class="updatePassword" @click="goUpdatePassword">
             <div>
               <i></i>
               <span>修改密码</span>
@@ -115,9 +124,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
   </div>
 </template>
 <script>
-  import {mapGetters} from 'vuex'
-  import {XHeader, TransferDom, Swiper, SwiperItem, Popup} from 'vux'
-
+  import {mapGetters} from 'vuex';
+  import {XHeader, TransferDom, Swiper, SwiperItem, Popup,ConfirmPlugin,AlertPlugin  } from 'vux';
+  Vue.use(ConfirmPlugin);
+  Vue.use(AlertPlugin);
   export default {
     directives: {
       TransferDom
@@ -126,7 +136,14 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     data() {
       return {
         swiperIndex: 0,
+        userInf: '',
+        gignInName:'签到',
+        signInActive:'已签到',
         showToUpdate: true,
+        specialAlarmIsTrue: false,
+        specialAlarmIsTrue1: false,
+        generalAlarmIsTrue: false,
+        generalAlarmIsTrue1: false,
         show8: false,
         isShowNav: false,
         drawerVisibility: false
@@ -141,13 +158,165 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     computed: mapGetters([
       'swiperList',
       'scrollingMessageList',
-      'userInfo'
+      'userInfo',
+      'searchAarmList',
     ]),
     created() {
+      //查询是否签到
+      this.searchSignIn();
       //获取轮播图和滚动消息
-      this.initSwiperList()
+      this.initSwiperList();
+      //获取用户信息
+      this.userInf=JSON.parse(localStorage.getItem("userInfo"));
     },
     methods: {
+      //签到
+      signIn(){
+        this.searchSignIn();
+      },
+      //查询今天是否签到
+      searchSignIn(){
+        let userId = this.userInfo.sm_ui_ID;
+        let options ={
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sos_si_UserID": userId?userId:""//用户ID
+        };
+        this.$store.dispatch("searchSignInIsTrue",options)
+          .then(
+            (suc)=>{
+              this.gignInName=suc;
+            },
+            (err)=>{
+
+            },
+          );
+      },
+
+      //添加签到
+      addSignIn(){
+
+      },
+      //SOS
+      ClickSOS(){
+        //添加报警
+        this.addAlarm()
+        //一直监听接警状态
+        window.clearInterval(int);
+        var int=self.setInterval(this.reflashInt,30000)
+      },
+      //添加报警信息
+      addAlarm(alarmType){
+        let userId=this.userInf.sm_ui_ID;
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "token": "",
+          "data": {
+            "sm_al_usID": userId?userId:"",//报警人账号
+            "sm_al_Longitude": "105.44408",//报警位置经度
+            "sm_al_Latitude": "28.896971",//报警位置纬度
+            "sm_al_Longgd": "105.44768012152778",//经度（高德）
+            "sm_al_Latgd": "28.89395751953125",//纬度（高德）
+            "sm_al_Type": "110",//报警类型
+            "sm_al_IsSosType": alarmType?alarmType:"0",//报警类型（0普通报警1SOS报警）
+            "sm_al_ProviceName": "四川省",//省名称
+            "sm_al_CityID": "0830",//市ID
+            "sm_al_CityName": "泸州市",//市名称
+            "sm_al_ContryID": "510502",//区县ID
+            "sm_al_ContryName": "江阳区",//区县名称
+            "sm_al_Address": "四川省泸州市江阳区北城街道一环路现代150大厦",//详细地址
+          }
+        };
+        this.$store.dispatch('addAlarmAction',options)
+          .then(
+            (data)=>{
+              this.generalAlarmIsTrue=true;
+              this.$vux.alert.show({
+//              title: 'Vux is Cool',
+                content: data,
+                onShow () {
+                },
+                onHide () {
+                }
+              })
+            }
+          );
+      },
+      //查询接警状态
+      searchAarm(){
+        let userId=this.userInf.sm_ui_ID;
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sm_al_UserID": userId?userId:"",//用户ID
+        };
+        this.$store.dispatch('searchAarmAction',options)
+          .then(()=>{
+            let statusObj=this.searchAarmList[0];
+//判断接警信息
+            //一般报警
+            if(statusObj.sm_al_NormaStatus==1 && statusObj.sm_al_Status==0){
+              this.generalAlarmIsTrue=true;
+              this.generalAlarmIsTrue1=false;
+            }else if(statusObj.sm_al_NormaStatus==1 && statusObj.sm_al_Status==1){
+              this.generalAlarmIsTrue=false;
+              this.generalAlarmIsTrue1=true;
+            }else{
+              this.generalAlarmIsTrue=true;
+              this.generalAlarmIsTrue1=false;
+            };
+            //特殊报警
+            if(statusObj.sm_al_SosStatus==1 && statusObj.sm_al_Status==0){
+              this.specialAlarmIsTrue=true;
+              this.specialAlarmIsTrue1=false;
+            }else if(statusObj.sm_al_SosStatus==1 && statusObj.sm_al_Status==1){
+              this.specialAlarmIsTrue=false;
+              this.specialAlarmIsTrue1=true;
+            }else{
+              this.specialAlarmIsTrue=false;
+              this.specialAlarmIsTrue1=false;
+            };
+
+          });
+      },
+      //刷新
+      reflashInt(){
+        //查询接警状态
+        this.searchAarm();
+      },
+      //内部通告
+      goNotice(){
+        this.$router.push({
+          name: 'Notice',
+        })
+      },
+      //我要报警
+      confirmWindow(){
+        const _this = this // 需要注意 onCancel 和 onConfirm 的 this 指向
+        this.$vux.confirm.show({
+          onCancel () {
+          },
+          onConfirm () {
+            let alarmType=1;
+            _this.addAlarm(alarmType)
+          },
+          title:'SOS紧急报警',
+          content:'本功能在您不方便发文字、语音或者视频信息时使用,开启后系统会自动上传您周边的录音到110报警台',
+        });
+
+// 获取显示状态
+        this.$vux.confirm.isVisible() // v2.9.1 支持
+      },
       //点击图片
       demo06_onIndexChange() {
       },
@@ -161,6 +330,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
           "pcName": "",
         }
         this.$store.dispatch('initSwiperList', options)
+      },
+      //报警须知
+      alarmNeeds(){
+        console.log(1)
       },
       //设置
       goSetting() {
@@ -180,8 +353,8 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       },
       //退出登录
       loginOut() {
-        this.$store.commit('setUserInfo', {})
-        localStorage.removeItem('userInfo')
+        this.$store.commit('setUserInfo', {});
+        localStorage.removeItem('userInfo');
        setTimeout(()=>{
          window.location.reload()
        },100)
@@ -194,9 +367,17 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       goUserFeedback(){
         this.$router.push({name: 'UserFeedback'})
       },
+      //修改密码
+      goUpdatePassword(){
+        this.$router.push({name: 'ChangePassword'})
+      },
       //我的守护人
       goMyGuardian(){
         this.$router.push({name: 'MyGuardian'})
+      },
+      //我的位置
+      goMyLocation(){
+        this.$router.push({name: 'MyLocation'})
       },
       //紧急联系人
       goUrgentContacts(){
@@ -420,6 +601,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     margin-right: 20/@rem;
   }
 
+  .titleBox > span.active {
+    color: green;
+  }
+
   .titleBox > span {
     float: left;
     text-align: center;
@@ -489,8 +674,8 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     background: url("../assets/img/ewmShare.png") no-repeat;
   }
 
-  .checkUpdate > i {
-    background: url("../assets/img/checkUpdate.png") no-repeat;
+  .alarmNeeds > i {
+    background: url("../assets/img/alarmRecord.png") no-repeat;
   }
 
   .setting > i {
@@ -514,5 +699,25 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
     display: block;
     text-align: center;
     color: #2d82e5;
+  }
+
+  .specialAlarm{
+    width: 50/@rem;
+    height: 50/@rem;
+    position: fixed;
+    top: 12/@rem;
+    right: 100/@rem;
+    z-index: 1;
+
+  }
+
+  .generalAlarm{
+    width: 50/@rem;
+    height: 50/@rem;
+    position: fixed;
+    top: 12/@rem;
+    right: 20/@rem;
+    z-index: 1;
+
   }
 </style>

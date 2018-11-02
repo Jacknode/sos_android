@@ -7,6 +7,10 @@ const state = {
   swiperList:[],//轮播图
   scrollingMessageList:[],//滚动消息
   userInfo:{},//用户登录信息
+  searchAarmList:[],//查询报警信息
+  searchAlarmInfoList:[],//查询报警记录
+  selectInternalCirculationList:[],//查询内部通告列表
+  searchUserBookList:[],//查询用户手册
 };
 
 const mutations = {
@@ -16,9 +20,22 @@ const mutations = {
   initScrollingMessageList(state,data){
     state.scrollingMessageList = data;
   },
+  searchAarmAction(state,data){
+    state.searchAarmList = data;
+  },
+  searchUserBook(state,data){
+    state.searchUserBookList = data;
+  },
   setUserInfo(state,obj){
     state.userInfo = obj;
   },
+  searchAlarmInfoAction(state,data){
+    state.searchAlarmInfoList = data;
+  },
+  selectInternalCirculation(state,data){
+    state.selectInternalCirculationList = data;
+  },
+
 };
 
 export default {

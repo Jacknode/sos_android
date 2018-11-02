@@ -10,7 +10,7 @@
       <!--mescroll滚动区域的基本结构-->
       <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
         <ul class="recordList">
-          <li v-for="item,index in AlarmRecordUpCallbackList">
+          <li v-for="item,index in AlarmRecordUpCallbackList" @click="alarmDetails(item,index)">
             <strong>{{item.sm_al_TypeName}}</strong>
             <div class="policeTime clearfix">
               <i></i>
@@ -27,8 +27,57 @@
         <!--内容...-->
       </mescroll-vue>
       <img src="../assets/img/policeListBg.png" class="imgBg" v-show="!AlarmRecordUpCallbackList.length" alt="">
-
     <!--</section>-->
+    <!--报警详情-->
+    <div class="alarmDetail" v-show="alarmDetailIsShow">
+      <ul class="detailContent">
+        <li>
+          <span>用户ID:</span>
+          <span>{{searchAlarmInfoObj.sm_al_UserID}}</span>
+        </li>
+        <li>
+          <span>用户名称:</span>
+          <span>{{searchAlarmInfoObj.sm_al_UserName}}</span>
+        </li>
+        <li>
+          <span>联系电话:</span>
+          <span>{{searchAlarmInfoObj.sm_al_UserPhone}}</span>
+        </li>
+        <li>
+          <span>报警类型:</span>
+          <span>{{searchAlarmInfoObj.sm_al_TypeName}}</span>
+        </li>
+        <li>
+          <span>报警时间:</span>
+          <span>{{searchAlarmInfoObj.sm_al_CreateTime}}</span>
+        </li>
+        <li>
+          <span>报警经度:</span>
+          <span>{{searchAlarmInfoObj.sm_al_Longgd}}</span>
+        </li>
+        <li>
+          <span>报警纬度:</span>
+          <span>{{searchAlarmInfoObj.sm_al_Latgd}}</span>
+        </li>
+        <li>
+          <span>身份证号码:</span>
+          <span>{{searchAlarmInfoObj.sm_al_CertNo}}</span>
+        </li>
+        <li>
+          <span>联系人号码:</span>
+          <span>{{searchAlarmInfoObj.sm_al_ConnectTelePhone}}</span>
+        </li>
+        <li>
+          <span>接警状态:</span>
+          <span>{{searchAlarmInfoObj.sm_al_Status | getDealAlarm }}</span>
+        </li>
+        <li>
+          <span>备注:</span>
+          <span>{{searchAlarmInfoObj.sm_al_Remark}}</span>
+        </li>
+      </ul>
+      <div id="container"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -44,6 +93,7 @@
     },
     computed: mapGetters([
       'userInfo',
+      'searchAlarmInfoList',
     ]),
     data() {
       return {
@@ -69,6 +119,7 @@
           "rows": 5//条数
         },
         value: false,
+        alarmDetailIsShow: false,
         mescroll: null, // mescroll实例对象
         mescrollDown:{}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
         mescrollUp: { // 上拉加载的配置.
@@ -92,17 +143,69 @@
             tip: "暂无相关数据~" //提示
           }
         },
-        dataList: [] // 列表数据
+        dataList: [], // 列表数据
+        searchAlarmInfoObj:'',//查询报警信息对象
       }
     },
     methods: {
+      //初始化地图
+      initMyMap(){
+        var mapObj = new AMap.Map('container', {
+          resizeEnable: true
+        })
+      },
+      //报警详情
+      alarmDetails(item,index){
+        this.searchAlarmInfo(item);
+      },
+      //查询报警信息
+      searchAlarmInfo(item){
+        let userId = item.sm_al_UserID;
+        let userName = item.sm_al_UserName;
+        let userPhone = item.sm_al_UserPhone;
+        let idcard = item.sm_al_CertNo;
+        let contryId = item.sm_al_ContryID;
+        let alarmType = item.sm_al_Type;
+        let alarmTypeName = item.sm_al_TypeName;
+        let status = item.sm_al_Status;
+        let isDelete = item.sm_al_IsDelete;
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "token": "",
+          "sm_al_ID": "",//报警信息编号
+          "sm_al_UserID": userId?userId:"",//报警人账号
+          "sm_al_UserName": userName?userName:"",//报警人名称
+          "sm_al_UserPhone": userPhone?userPhone:"",//报警人电话
+          "sm_al_CertNo": idcard?idcard:"",//报警人身份证号码
+          "sm_al_Type": alarmType?alarmType:"",//报警类型
+          "sm_al_TypeName": alarmTypeName?alarmTypeName:"",//报警类型名称
+          "sm_al_Status": status?status:"0",//报警状态(0未处理 1处理中 2处理完毕)
+          "sm_al_IsDelete": isDelete?isDelete:"0",//是否删除（0未删除1已删除）
+          "sm_al_CityOrContryID": contryId?contryId:"",//市或区县ID
+          "page": 1,//页码
+          "rows": 5//条数
+        };
+        this.$store.dispatch("searchAlarmInfoAction",options)
+          .then(
+            ()=>{
+              if(this.searchAlarmInfoList){
+                this.searchAlarmInfoObj=this.searchAlarmInfoList[0];
+              };
+              this.alarmDetailIsShow=true;
+            },
+            ()=>{},
+          );
+      },
       // mescroll组件初始化的回调,可获取到mescroll对象
       mescrollInit (mescroll) {
         this.mescroll = mescroll
       },
       //上拉加载
       upCallback(page, mescroll){
-        console.log(page, mescroll)
         this.options.page = page.num;
         this.options.sm_al_UserID = this.userInfo.sm_ui_ID
         this.$store.dispatch('AlarmRecordUpCallback',this.options)
@@ -126,6 +229,14 @@
       goTopPage() {
         this.$router.go(-1)
       }
+    },
+    mounted(){
+      this.$nextTick(()=>{
+        this.initMyMap();
+      });
+    },
+    created(){
+//      this.userInfo=JSON.parse(localStorage.getItem('userInfo'));
     },
   }
 </script>
@@ -254,6 +365,33 @@
     float: left;
     width: 100%;
     line-height: 30/@rem;
+  }
+
+  .alarmDetail{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    z-index: 3;
+  }
+
+  .detailContent{
+    width: 100%;
+    background-color: white;
+    padding: 20/@rem;
+  }
+
+  .detailContent>li{
+    margin: 10/@rem;
+    font-size: 26/@rem;
+    line-height: 50 @rem;
+  }
+
+  #container{
+    height: 100%;
+    width: 100%;
   }
 
 </style>

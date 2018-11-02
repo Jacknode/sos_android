@@ -8,16 +8,18 @@
     </header>
     <section>
       <div class="ewmBox">
-        <div>
+<!--        <div>
           <div>
             <qrcode
               :size="137"
               value="http://qiankevideo.oss-cn-hangzhou.aliyuncs.com/20181011/41489ed32d9b45a2b577abc8d12b8cee.apk"
               type="img"></qrcode>
           </div>
-        </div>
-        <p>扫描二维码下载APP</p>
+        </div>-->
+        <!--<p>扫描二维码下载APP</p>-->
       </div>
+      <div class="goQQ" @click="goQQ"></div>
+      <div class="goWeiXin" @click="goWeiXin"></div>
     </section>
   </div>
 </template>
@@ -33,6 +35,12 @@
       return {}
     },
     methods: {
+      goQQ(){
+        console.log(1)
+      },
+      goWeiXin(){
+        console.log(2)
+      },
       goTopPage() {
         this.$router.go(-1)
       }
@@ -78,9 +86,11 @@
     position: fixed;
     top: 80/@rem;
     left: 0;
+    width:100%;
+    height:100%;
     right: 0;
     bottom: 0;
-    background: url("../assets/img/ewmShareBg.png") no-repeat;
+    background: url("../assets/img/ewmShareBg1.png") no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
   }
@@ -117,6 +127,25 @@
     font-family: "宋体";
     text-align: center;
     color: #3593be;
+
+  }
+
+  .goQQ{
+    width: 65 /@rem;
+    height: 65 /@rem;
+    border-radius: 45px;
+    position: absolute;
+    top: 59%;
+    left: 26%;
+  }
+
+  .goWeiXin{
+    width: 65 /@rem;
+    height: 65 /@rem;
+    border-radius: 45px;
+    position: absolute;
+    top: 59%;
+    right: 26%;
   }
 
 </style>
