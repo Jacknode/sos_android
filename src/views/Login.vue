@@ -21,12 +21,12 @@
         <a href="javascript:;" @click="login">登录</a>
       </div>
       <div class="loginErr clearfix">
-        <a href="javascript:;" @click="goRegister">注册</a>
-        <!--<a href="javascript:;" @click="goForgetPassword">忘记密码?</a>-->
+        <router-link to="Register">注册</router-link>
+        <!--<span @click="goForgetPassword">忘记密码?</span>-->
       </div>
     </section>
     <toast v-model="showPositionValue" :type="type" :time="800" is-show-mask position="middle">{{toastValue}}</toast>
-    <toast v-model="showSuccess" type="success"  is-show-mask position="middle">登录成功</toast>
+    <toast v-model="showSuccess" type="success" is-show-mask position="middle">登录成功</toast>
   </div>
 </template>
 <script>
@@ -40,12 +40,12 @@
     },
     data() {
       return {
-        typeV:'password',
+        typeV: 'password',
         toastValue: '手机号不能为空！',
         type: 'warn',
-        showSuccess:false,
+        showSuccess: false,
         showPositionValue: false,
-        options:{
+        options: {
           "loginUserID": "huileyou",
           "loginUserPass": "123",
           "operateUserID": "",
@@ -59,19 +59,19 @@
     },
     methods: {
       //眼睛
-      look(){
-        if(this.typeV== 'text'){
-          this.typeV= 'password'
-        }else{
-          this.typeV= 'text'
+      look() {
+        if (this.typeV == 'text') {
+          this.typeV = 'password'
+        } else {
+          this.typeV = 'text'
         }
       },
       //注册
       goRegister() {
-        this.$router.push({name: 'Register'})
+        this.$router.push({name: ''})
       },
       //登录
-      login(){
+      login() {
         if (!this.options.userID) {
           this.showPositionValue = true;
           return
@@ -81,21 +81,21 @@
           this.showPositionValue = true;
           return
         }
-        this.$store.dispatch('loginSubmit',this.options)
-        .then((suc)=>{
-          //弹窗设置
-          this.showSuccess = true;
-          setTimeout(()=>{
-            this.$router.push({name: 'Home'})
-          },1000)
-        }, err => {
-          this.type = 'warn';
-          this.toastValue = err
-          this.showPositionValue = true;
-        })
+        this.$store.dispatch('loginSubmit', this.options)
+          .then((suc) => {
+            //弹窗设置
+            this.showSuccess = true;
+            setTimeout(() => {
+              this.$router.push({name: 'Home'})
+            }, 1000)
+          }, err => {
+            this.type = 'warn';
+            this.toastValue = err
+            this.showPositionValue = true;
+          })
       },
       //忘记密码
-      goForgetPassword(){
+      goForgetPassword() {
         this.$router.push({name: 'ForgetPassword'})
       },
       initData() {

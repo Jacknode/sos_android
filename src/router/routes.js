@@ -17,6 +17,13 @@ export default [
     name: 'SettingPage',
     component: getComponent('SettingPage')
   },
+
+  //报警须知
+  {
+    path: '/alarmNeeds',
+    name: 'AlarmNeeds',
+    component: getComponent('AlarmNeeds')
+  },
   //我的位置
   {
     path: '/myLocation',
@@ -40,6 +47,12 @@ export default [
     path: '/register',
     name: 'Register',
     component: getComponent('Register')
+  },
+  //SOS适用场景
+  {
+    path: '/applicableScene',
+    name: 'ApplicableScene',
+    component: getComponent('ApplicableScene')
   },
   //忘记密码
   {
@@ -112,6 +125,12 @@ export default [
     path: '/addUrgentContacts',
     name: 'AddUrgentContacts',
     component: getComponent('AddUrgentContacts')
+  },
+  //修改紧急联系人
+  {
+    path: '/updateUrgentContacts',
+    name: 'UpdateUrgentContacts',
+    component: getComponent('UpdateUrgentContacts')
   },
   //SOS地图
   {

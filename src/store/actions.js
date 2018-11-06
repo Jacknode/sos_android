@@ -22,6 +22,24 @@ export default {
         })
     })
   },
+  //添加联系人
+  sureAdd(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/EmergencyContactPerson/Insert', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (data.resultcode == "01") {
+            relove(data.resultcontent);
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
   initSwiperList({commit},data){
     return new Promise(function (relove, reject) {
       axios.post(getNewStr + '/SowingPic/AndroidSelectMx', JSON.stringify(data), {
@@ -108,6 +126,24 @@ export default {
   updatePasswordAction({commit},data){
     return new Promise(function (relove, reject) {
       axios.post(getNewStrHly + '/UserInfo/UpdatePassword', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.resultcontent);
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //修改联系人
+  updateContact(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStrHly + '/EmergencyContactPerson/Update', JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -224,7 +260,6 @@ export default {
       })
         .then(data => {
           var data = data.data;
-          console.log(data)
           if (Number(data.resultcode) == 200) {
             relove(data.totalRows);
             commit("selectInternalCirculation",data.data)
@@ -244,10 +279,66 @@ export default {
       })
         .then(data => {
           var data = data.data;
-          console.log(data)
           if (Number(data.resultcode) == 200) {
             relove(data.totalRows);
             commit("searchUserBook",data.data)
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //查询紧急联系人
+  searchContact({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/EmergencyContactPerson/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.totalRows);
+            commit("searchContact",data.data)
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //查询报警须知
+  initAlarmNeeds({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/Document/SelectApp', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.data);
+            commit("initAlarmNeeds",data.data)
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //初始化适用场景
+  initApplicableScene({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/UsageScenario/AndroidSelect', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.totalRows);
+            commit("initApplicableScene",data.data)
           } else {
             reject(data.resultcontent)
           }

@@ -54,6 +54,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <i></i>
               <strong>报警须知</strong>
             </li>
+            <li class="applicableScene clearfix" @click="goApplicableScene">
+              <i></i>
+              <strong>适用场景</strong>
+            </li>
             <li class="setting clearfix" @click="goSetting">
               <i></i>
               <strong>设置</strong>
@@ -125,7 +129,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
 </template>
 <script>
   import {mapGetters} from 'vuex';
-  import {XHeader, TransferDom, Swiper, SwiperItem, Popup,ConfirmPlugin,AlertPlugin  } from 'vux';
+  import {XHeader, TransferDom, Swiper, SwiperItem, Popup,ConfirmPlugin,AlertPlugin , ConfigPlugin } from 'vux';
   Vue.use(ConfirmPlugin);
   Vue.use(AlertPlugin);
   export default {
@@ -170,6 +174,12 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       this.userInf=JSON.parse(localStorage.getItem("userInfo"));
     },
     methods: {
+      //适用场景
+      goApplicableScene(){
+        this.$router.push({
+          name:'ApplicableScene',
+        })
+      },
       //签到
       signIn(){
         this.searchSignIn();
@@ -191,7 +201,7 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               this.gignInName=suc;
             },
             (err)=>{
-
+              this.gignInName=err;
             },
           );
       },
@@ -333,7 +343,9 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       },
       //报警须知
       alarmNeeds(){
-        console.log(1)
+        this.$router.push({
+          name:'AlarmNeeds',
+        })
       },
       //设置
       goSetting() {
@@ -675,6 +687,9 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
   }
 
   .alarmNeeds > i {
+    background: url("../assets/img/alarmRecord.png") no-repeat;
+  }
+  .applicableScene>i{
     background: url("../assets/img/alarmRecord.png") no-repeat;
   }
 

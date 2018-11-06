@@ -12,15 +12,6 @@
             <input type="text" placeholder="手机号" v-model="register.phone">
           </div>
         </div>
-        <div class="loginPassword clearfix">
-          <i></i>
-          <div>
-            <div>
-              <input type="password" placeholder="请输入密码" v-model="register.password">
-              <i></i>
-            </div>
-          </div>
-        </div>
         <div class="messageNum clearfix">
           <i></i>
           <div class="clearfix">
@@ -31,7 +22,30 @@
             </div>
           </div>
         </div>
-        <a href="javascript:;" @click="submit">确定</a>
+        <div class="loginPassword clearfix">
+          <i></i>
+          <div>
+            <div>
+              <input type="password" placeholder="请输入密码" v-model="register.password">
+              <i></i>
+            </div>
+          </div>
+        </div>
+        <div class="loginPassword clearfix">
+          <i></i>
+          <div>
+            <div>
+              <input type="password" placeholder="请确认密码" v-model="register.password">
+              <i></i>
+            </div>
+          </div>
+        </div>
+        <div class="userBooksBox clearfix">
+          <input class="isCheck" type="checkbox">
+          <div>已阅读并同意</div>
+          <div>《用户协议》</div>
+        </div>
+        <a href="javascript:;" @click="submit">注册</a>
         <p>已有账号?<a href="javascript:;" @click="goLogin">登录</a></p>
       </section>
     </div>
@@ -40,12 +54,12 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
-  import {Toast} from 'vux'
+  import {Toast,AlertPlugin } from 'vux'
 
   export default {
     computed: mapGetters([]),
     components: {
-      Toast
+      Toast,
     },
     data() {
       return {
@@ -116,30 +130,40 @@
       },
       //提交
       submit(){
-        if (!this.register.validateNo) {
-          this.toastValue = '验证码不能为空'
-          this.showPositionValue = true;
-          return
-        }
-        if (!this.register.password) {
-          this.toastValue = '密码不能为空'
-          this.showPositionValue = true;
-          return
-        }
-        this.$store.dispatch('registerSubmit',this.register)
-        .then((suc)=>{
-          //弹窗设置
-          this.type = 'success';
-          this.toastValue = suc
-          this.showPositionValue = true;
-          setTimeout(()=>{
-            this.$router.push({name: 'Login'})
-          },1000)
-        }, err => {
+        if (document.getElementsByClassName('isCheck')[0].checked == false){
+//          this.$vux.alert.show({
+//            content:'请阅读并同意用户协议',
+//          })
+
           this.type = 'warn';
-          this.toastValue = err
+          this.toastValue = '请阅读并同意用户协议';
           this.showPositionValue = true;
-        })
+        }{
+          if (!this.register.validateNo) {
+            this.toastValue = '验证码不能为空'
+            this.showPositionValue = true;
+            return
+          }
+          if (!this.register.password) {
+            this.toastValue = '密码不能为空'
+            this.showPositionValue = true;
+            return
+          }
+          this.$store.dispatch('registerSubmit',this.register)
+            .then((suc)=>{
+              //弹窗设置
+              this.type = 'success';
+              this.toastValue = suc
+              this.showPositionValue = true;
+              setTimeout(()=>{
+                this.$router.push({name: 'Login'})
+              },1000)
+            }, err => {
+              this.type = 'warn';
+              this.toastValue = err;
+              this.showPositionValue = true;
+            })
+        }
       },
       goLogin(){
         this.$router.push({name: 'Login'})
@@ -154,6 +178,23 @@
 </script>
 <style scoped lang="less" type="text/less">
   @rem: 20rem;
+  .userBooksBox{
+    padding: 20/@rem 0/@rem 20/@rem 120/@rem
+  }
+  .userBooksBox>input{
+    float: left;
+    margin:  2/@rem 4/@rem 0/@rem 0/@rem;
+  }
+  .userBooksBox>div{
+    float: left;
+  }
+  .userBooksBox>div:nth-of-type(1){
+    margin-right: 20/@rem;
+  }
+
+  .userBooksBox>div:nth-of-type(2){
+    color: green;
+  }
 
   input {
     border: none;

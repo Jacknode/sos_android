@@ -11,11 +11,17 @@ const state = {
   searchAlarmInfoList:[],//查询报警记录
   selectInternalCirculationList:[],//查询内部通告列表
   searchUserBookList:[],//查询用户手册
+  searchContactList:[],//查询紧急联系人
+  initAlarmNeedsList:[],//查询报警须知
+  initApplicableSceneList:[],//查询适用场景
 };
 
 const mutations = {
   initSwiperList(state,data){
     state.swiperList = data;
+  },
+  searchContact(state,data){
+    state.searchContactList = data;
   },
   initScrollingMessageList(state,data){
     state.scrollingMessageList = data;
@@ -34,6 +40,12 @@ const mutations = {
   },
   selectInternalCirculation(state,data){
     state.selectInternalCirculationList = data;
+  },
+  initAlarmNeeds(state,data){
+    state.initAlarmNeedsList = data;
+  },
+  initApplicableScene(state,data){
+    state.initApplicableSceneList = data;
   },
 
 };

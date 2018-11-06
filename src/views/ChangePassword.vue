@@ -55,6 +55,7 @@
     Alert,
     Toast,
   } from 'vux'
+  Vue.use(AlertPlugin)
   export default {
     computed: mapGetters([]),
     data() {
@@ -81,7 +82,6 @@
     },
     created(){
       this.userInfo= JSON.parse(localStorage.getItem('userInfo'));
-      console.log(this.userInfo)
     },
     methods: {
       submitButton(){

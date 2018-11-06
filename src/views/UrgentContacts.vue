@@ -11,16 +11,17 @@
     </header>
     <section>
       <ul class="guardianList">
-        <li class="clearfix" v-for="item,index in 10">
+        <li class="clearfix" v-for="item,index in searchContactList">
           <div class="guardianName">
-            <strong>妈妈</strong>
-            <span>13096009505</span>
+            <!--<strong>{{item.sos_ecp_ECPName}}</strong>-->
+            <strong>紧急联系人1</strong>
+            <span>{{item.sos_ecp_ECPPhone}}</span>
           </div>
           <div class="operation">
             <!--删除-->
             <span class="deleteIcon"></span>
             <!--编辑-->
-            <span class="editIcon"></span>
+            <span class="editIcon" @click="goUpdate(item)"></span>
           </div>
         </li>
       </ul>
@@ -39,7 +40,10 @@
     components: {
       Toast
     },
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'searchContactList',
+      'userInfo',
+    ]),
     watch: {},
     data() {
       return {
@@ -49,8 +53,53 @@
       }
     },
     created() {
+      this.initData();
     },
     methods: {
+/*      goUpdate(){
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "data": {
+            "sos_ecp_ID": "1",//紧急联系人标识
+            "sos_ecp_UserID": "1",//用户ID
+            "sos_ecp_ECPID": "1",//紧急联系人ID
+            "sos_ecp_type": "1",//状态(1申请中2同意3拒绝)
+          }
+        };
+        this.$store.dispatch('updateContact',options)
+          .then();
+      },*/
+      goUpdate(item){
+        console.log(1,item)
+        this.$router.push({
+          name: 'UpdateUrgentContacts',
+        })
+      },
+      initData(){
+        let userInfo='';
+        if(this.userInfo){
+          userInfo=this.userInfo.sm_ui_ID;
+        };
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "sos_ecp_ID": "",//紧急联系人标识
+          "sos_ecp_UserID":userInfo?userInfo: "",//用户ID
+          "sos_ecp_ECPID": "",//紧急联系人ID
+          "sos_ecp_type": "",//状态(1申请中2同意3拒绝)
+          "page": 1,//页码
+          "rows": 5//条数
+        };
+        this.$store.dispatch('searchContact',options)
+          .then()
+      },
       goTopPage() {
         this.$router.go(-1)
       },

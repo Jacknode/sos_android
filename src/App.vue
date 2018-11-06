@@ -47,8 +47,14 @@
     },
     watch:{
       '$route'(to,from){
-        if(!this.userInfo.sm_ui_ID){
-          this.$router.push({name:'Login'})
+        if(to.name=='Register' && from.name=='Login'){
+//          this.$router.push({name:'Register'})
+        }else if(to.name=='Login' && from.name=='Register'){
+//          this.$router.push({name:'Login'})
+        }else{
+          if(!this.userInfo.sm_ui_ID){
+            this.$router.push({name:'Login'})
+          }
         }
       }
     },

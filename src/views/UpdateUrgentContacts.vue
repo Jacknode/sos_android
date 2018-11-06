@@ -4,7 +4,7 @@
       <div class="leftIcon" @click="goTopPage">
         <i></i>
       </div>
-      <strong>添加紧急联系人</strong>
+      <strong>修改紧急联系人</strong>
     </header>
     <section>
 <!--      <div class="guardianName clearfix">
