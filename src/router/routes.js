@@ -17,6 +17,12 @@ export default [
     name: 'SettingPage',
     component: getComponent('SettingPage')
   },
+  //用户手册
+  {
+    path: '/userManual',
+    name: 'UserManual',
+    component: getComponent('UserManual')
+  },
 
   //报警须知
   {

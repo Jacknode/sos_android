@@ -23,7 +23,7 @@
           <div class="goBack">
             <div class="trangle" @click="goBack"></div>
           </div>
-          <div class="overBoxContent">{{overBoxContent}}</div>
+          <div class="overBoxContent" v-html="overBoxContent"></div>
         </div>
       </div>
     </div>
@@ -64,7 +64,6 @@
             );
         },
         goDetail(item){
-          document.getElementsByClassName('overBoxContent')[0].innerHTML=item.sos_us_Content;
           this.overBoxContent=item.sos_us_Content;
           this.overBoxIsShow=true;
         },

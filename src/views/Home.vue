@@ -38,10 +38,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <i></i>
               <strong>我守护的人</strong>
             </li>
-<!--            <li class="userFeedback1 clearfix" @click="goUserFeedback">
+            <li class="userFeedback1 clearfix" @click="goUserManual">
               <i></i>
-              <strong>用户反馈</strong>
-            </li>-->
+              <strong>用户手册</strong>
+            </li>
 <!--            <li class="recommendedFriends clearfix">
               <i></i>
               <strong>推荐给朋友</strong>
@@ -174,6 +174,12 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
       this.userInf=JSON.parse(localStorage.getItem("userInfo"));
     },
     methods: {
+      //用户手册
+      goUserManual(){
+        this.$router.push({
+          name:'UserManual',
+        })
+      },
       //适用场景
       goApplicableScene(){
         this.$router.push({
@@ -198,17 +204,47 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
         this.$store.dispatch("searchSignInIsTrue",options)
           .then(
             (suc)=>{
-              this.gignInName=suc;
+//              001 签到
+              if(suc=="签到"){
+                this.addSignIn();
+              }else if(suc=="已签到"){
+                this.gignInName="已签到"
+              };
             },
             (err)=>{
-              this.gignInName=err;
+              console.log('签到失败')
+/*//              002 已签到
+              if(this.gignInName==err){
+                this.addSignIn();
+              }else{
+                this.gignInName="已签到"
+              };*/
             },
           );
       },
 
       //添加签到
       addSignIn(){
-
+        let userId = this.userInfo.sm_ui_ID;
+        let options = {
+          "loginUserID": "huileyou",
+          "loginUserPass": "123",
+          "operateUserID": "",
+          "operateUserName": "",
+          "pcName": "",
+          "data": {
+            "sos_si_UserID":userId?userId:"",//用户ID
+          }
+        }
+        this.$store.dispatch('addSignIn',options)
+          .then(
+            (suc)=>{
+              if(suc=='你今天已签到'){
+                this.gignInName="已签到";
+              };
+            },
+            ()=>{},
+          );
       },
       //SOS
       ClickSOS(){

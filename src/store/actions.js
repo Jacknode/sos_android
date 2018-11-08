@@ -102,6 +102,24 @@ export default {
       })
     })
   },
+  //添加签到
+  addSignIn(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStrHly + '/SignIn/Insert', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (data.resultcode == "008"){
+            relove(data.resultcontent);
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
   //登录提交
   loginSubmit({commit},data){
     return new Promise(function (relove, reject) {
@@ -244,7 +262,9 @@ export default {
           var data = data.data;
           if (data.resultcode == '001') {
             relove(data.resultcontent);
-          } else {
+          } else if (data.resultcode == '002'){
+            relove(data.resultcontent)
+          } else{
             reject(data.resultcontent)
           }
         })
