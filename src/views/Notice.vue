@@ -55,7 +55,6 @@
       },
       methods:{
         newsDetail(item){
-          console.log(111,item)
           this.newsDetailObj.sos_ic_type=item.sos_ic_type;
           this.newsDetailObj.sos_ic_body=item.sos_ic_body;
           this.newsDetailObj.sos_ic_Title=item.sos_ic_Title;

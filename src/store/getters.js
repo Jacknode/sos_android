@@ -12,5 +12,7 @@ export default {
   searchContactList: state => state.searchContactList,
   initAlarmNeedsList: state => state.initAlarmNeedsList,
   initApplicableSceneList: state => state.initApplicableSceneList,
+  initUserManualList: state => state.initUserManualList,
+  initPersonalCenterList: state => state.initPersonalCenterList,
 }
 

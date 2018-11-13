@@ -70,10 +70,8 @@
 //                title: 'Vux is Cool',
                 content: suc,
                 onShow () {
-                  console.log('Plugin: I\'m showing')
                 },
                 onHide () {
-                  console.log('Plugin: I\'m hiding')
                 }
               })*/
             },
@@ -82,10 +80,8 @@
 //                title: 'Vux is Cool',
                 content: err,
                 onShow () {
-                  console.log('Plugin: I\'m showing')
                 },
                 onHide () {
-                  console.log('Plugin: I\'m hiding')
                 }
               })
             },

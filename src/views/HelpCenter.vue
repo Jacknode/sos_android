@@ -18,8 +18,10 @@
       <div class="boxTop">
         <div class="goBack" @click="goBack"></div>
       </div>
-      <div class="detailContent">{{detailContent}}</div>
-      <img class="detailContentImg" :src="detailContentImg" v-lazy="detailContentImg" alt="" width="100%" >
+      <div class="contentDetailContent">
+        <div class="detailContent">{{detailContent}}</div>
+        <img class="detailContentImg" :src="detailContentImg"  alt="" width="100%" >
+      </div>
     </div>
   </div>
 </template>
@@ -111,10 +113,20 @@
   }
 
   .boxTop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 25/@rem;
     background-color: #2e9bff;
     height: 80/@rem;
     width: 100%;
+  }
+  .contentDetailContent{
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    margin-top: 80/@rem;
   }
 
   .detailContent{
@@ -133,7 +145,10 @@
     bottom: 0;
     z-index: 10;
     background-color: white;
-    overflow: scroll;
+  }
+  .contentDetail:last-of-type{
+    /*overflow: scroll;*/
+    /*background-color: royalblue;*/
   }
 
   input {

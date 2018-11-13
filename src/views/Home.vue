@@ -34,10 +34,10 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               <i></i>
               <strong>紧急联系人</strong>
             </li>
-            <li class="myGuardian clearfix" @click="goMyGuardian">
+<!--            <li class="myGuardian clearfix" @click="goMyGuardian">
               <i></i>
               <strong>我守护的人</strong>
-            </li>
+            </li>-->
             <li class="userFeedback1 clearfix" @click="goUserManual">
               <i></i>
               <strong>用户手册</strong>
@@ -212,7 +212,6 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
               };
             },
             (err)=>{
-              console.log('签到失败')
 /*//              002 已签到
               if(this.gignInName==err){
                 this.addSignIn();
@@ -272,14 +271,42 @@ left: 0; z-index: 1;width: 100%; height: 44px;">
             "sm_al_Latgd": "28.89395751953125",//纬度（高德）
             "sm_al_Type": "110",//报警类型
             "sm_al_IsSosType": alarmType?alarmType:"0",//报警类型（0普通报警1SOS报警）
+            "sm_al_ProviceID": "510000",//省编码
             "sm_al_ProviceName": "四川省",//省名称
-            "sm_al_CityID": "0830",//市ID
+            "sm_al_CityID": "510500",//市ID
             "sm_al_CityName": "泸州市",//市名称
             "sm_al_ContryID": "510502",//区县ID
             "sm_al_ContryName": "江阳区",//区县名称
             "sm_al_Address": "四川省泸州市江阳区北城街道一环路现代150大厦",//详细地址
           }
         };
+
+//        LatLonPoint point = new LatLonPoint(location.getLatitude(), location.getLongitude());
+//        RegeocodeQuery query = new RegeocodeQuery(point, 200, GeocodeSearch.GPS);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+//        result = geocoderSearch.getFromLocation(query);// 设置同步逆地理编码请求
+//        if (result != null && result.getFormatAddress() != null) {
+//          SysPar.am_al_Address = result.getFormatAddress();
+//          SysPar.sm_al_ProviceName = result.getProvince();
+//          //SysPar.sm_al_CityID = result.getCityCode();
+//          SysPar.sm_al_CityName = result.getCity();
+//          SysPar.sm_al_ContryID = result.getAdCode();
+//          SysPar.sm_al_ContryName = result.getDistrict();
+//          if (SysPar.sm_al_ContryID.length() > 0) {
+//            SysPar.sm_al_CityID = SysPar.sm_al_ContryID.substring(0, 4) + "00";
+//            SysPar.sm_al_ProviceID=SysPar.sm_al_ContryID.substring(0, 2) + "0000";
+//            mHandler.sendEmptyMessage(110); //获取到区县编码去报警
+//          }
+//          else
+//            mHandler.sendEmptyMessage(1101);//没有获取到区县编码
+//        }
+//
+//        千科公司-曾坪 2018-11-08 11:56:49
+//        统一用新的编码 方便省市权限的控制
+//
+//        千科公司-曾坪 2018-11-08 11:57:18
+//        省编码 市编码  是用区县编码处理得到的
+
+
         this.$store.dispatch('addAlarmAction',options)
           .then(
             (data)=>{

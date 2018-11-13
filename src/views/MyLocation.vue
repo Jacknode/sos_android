@@ -163,7 +163,6 @@
     methods: {
       //初始化定位信息
       initPosition() {
-
         var mapObj = new AMap.Map('container', {
           resizeEnable: true
         })

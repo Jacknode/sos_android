@@ -7,7 +7,7 @@
       <strong>设置</strong>
     </header>
     <section>
-      <p>建议打开坐标与报警上传，确保使用安全</p>
+<!--      <p>建议打开坐标与报警上传，确保使用安全</p>
       <ul class="functionList">
         <li class="positionUpLoading clearfix">
           <i></i>
@@ -31,7 +31,7 @@
             </div>
           </div>
         </li>
-      </ul>
+      </ul>-->
       <div class="helpCenter clearfix">
         <i></i>
         <div>

@@ -14,6 +14,8 @@ const state = {
   searchContactList:[],//查询紧急联系人
   initAlarmNeedsList:[],//查询报警须知
   initApplicableSceneList:[],//查询适用场景
+  initUserManualList:[],//查询用户手册
+  initPersonalCenterList:[],//查询用户信息
 };
 
 const mutations = {
@@ -46,6 +48,12 @@ const mutations = {
   },
   initApplicableScene(state,data){
     state.initApplicableSceneList = data;
+  },
+  initUserManual(state,data){
+    state.initUserManualList = data;
+  },
+  initPersonalCenter(state,data){
+    state.initPersonalCenterList = data;
   },
 
 };

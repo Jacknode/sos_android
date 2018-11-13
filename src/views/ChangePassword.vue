@@ -54,6 +54,7 @@
     Cell,
     Alert,
     Toast,
+    AlertPlugin,
   } from 'vux'
   Vue.use(AlertPlugin)
   export default {
@@ -85,40 +86,51 @@
     },
     methods: {
       submitButton(){
-        let options= {
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "token": "",
-          "userCode": this.userInfo.sm_ui_UserCode?this.userInfo.sm_ui_UserCode:'',//当前用户的账号
-          "oldPassword": this.oldPassword?this.oldPassword:'',//原来密码
-          "newPassword":this.newPassword?this.newPassword:'',//新密码
-        };
+        //判断两次密码修改是否相同
+        if(this.newPassword==this.newPassword2){
+          let options= {
+            "loginUserID": "huileyou",
+            "loginUserPass": "123",
+            "operateUserID": "",
+            "operateUserName": "",
+            "pcName": "",
+            "token": "",
+            "userCode": this.userInfo.sm_ui_UserCode?this.userInfo.sm_ui_UserCode:'',//当前用户的账号
+            "oldPassword": this.oldPassword?this.oldPassword:'',//原来密码
+            "newPassword":this.newPassword?this.newPassword:'',//新密码
+          };
 
-        this.$store.dispatch('updatePasswordAction',options)
-          .then((suc)=>{
-              this.$vux.alert.show({
-                title: '修改密码成功',
-                content: suc,
-                onHide() {
-                },
-                onShow() {
-                },
-              })
+          this.$store.dispatch('updatePasswordAction',options)
+            .then((suc)=>{
+                this.$vux.alert.show({
+                  title: '修改密码成功',
+                  content: suc,
+                  onHide() {
+                  },
+                  onShow() {
+                  },
+                })
 //              this.$router.go(-1)
-            this.$router.push({
-              name:'Login',
-            })
+                this.$router.push({
+                  name:'Login',
+                })
+              },
+              (err)=>{
+                this.$vux.alert.show({
+                  title: '修改密码失败',
+                  content: err,
+                })
+              });
+        }else {
+          this.$vux.alert.show({
+            title: '两次密码输入不一致',
+            content: '两次密码输入不一致',
+            onHide() {
             },
-            (err)=>{
-              this.$vux.alert.show({
-                title: '修改密码失败',
-                content: err,
-              })
-            });
-
+            onShow() {
+            },
+          });
+        };
       },
       goLogin(){
         this.$router.push({name: 'Login'})

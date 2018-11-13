@@ -74,7 +74,6 @@
           .then();
       },*/
       goUpdate(item){
-        console.log(1,item)
         this.$router.push({
           name: 'UpdateUrgentContacts',
         })

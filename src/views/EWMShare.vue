@@ -18,6 +18,9 @@
         </div>-->
         <!--<p>扫描二维码下载APP</p>-->
       </div>
+      <div class="shareId">
+        分享邀请码:{{shareId}}
+      </div>
       <div class="goQQ" @click="goQQ"></div>
       <div class="goWeiXin" @click="goWeiXin"></div>
     </section>
@@ -30,20 +33,27 @@
 
   export default {
     components: {Qrcode},
-    computed: mapGetters([]),
+    computed: mapGetters([
+      'userInfo',
+    ]),
     data() {
-      return {}
+      return {
+        shareId: '',
+      }
     },
     methods: {
       goQQ(){
-        console.log(1)
       },
       goWeiXin(){
-        console.log(2)
       },
       goTopPage() {
         this.$router.go(-1)
       }
+    },
+    created(){
+      if(this.userInfo){
+        this.shareId=JSON.parse(localStorage.getItem('userInfo')).sm_ui_ID
+      };
     },
   }
 </script>
@@ -146,6 +156,19 @@
     position: absolute;
     top: 59%;
     right: 26%;
+  }
+  .shareId{
+    width: 300 /@rem;
+    height: 65 /@rem;
+    position: absolute;
+    top: 47%;
+    right: 25%;
+    /*background-color: red;*/
+    line-height: 65 /@rem;
+    text-align: center;
+    font-size: 30/@rem;
+    padding-right: 45/@rem;
+    padding-top: 5/@rem;
   }
 
 </style>

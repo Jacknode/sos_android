@@ -102,6 +102,24 @@ export default {
       })
     })
   },
+  //修改个人信息
+  updatePersonalCenter(store,data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStrHly + '/UserInfo/Update', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.resultcontent);
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
   //添加签到
   addSignIn(store,data){
     return new Promise(function (relove, reject) {
@@ -359,6 +377,44 @@ export default {
           if (Number(data.resultcode) == 200) {
             relove(data.totalRows);
             commit("initApplicableScene",data.data)
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //初始化用户手册
+  initUserManual({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/UserManual/SelectApp', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.totalRows);
+            commit("initUserManual",data.data)
+          } else {
+            reject(data.resultcontent)
+          }
+        })
+    })
+  },
+  //初始化用户信息
+  initPersonalCenter({commit},data){
+    return new Promise(function (relove, reject) {
+      axios.post(getNewStr + '/UserInfo/Select', JSON.stringify(data), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(data => {
+          var data = data.data;
+          if (Number(data.resultcode) == 200) {
+            relove(data.totalRows);
+            commit("initPersonalCenter",data.data[0])
           } else {
             reject(data.resultcontent)
           }
