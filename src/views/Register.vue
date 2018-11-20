@@ -43,7 +43,7 @@
         <div class="userBooksBox clearfix">
           <input class="isCheck" type="checkbox">
           <div>已阅读并同意</div>
-          <div>《用户协议》</div>
+          <div @click="userDeal">《用户协议》</div>
         </div>
         <a href="javascript:;" @click="submit">注册</a>
         <p>已有账号?<a href="javascript:;" @click="goLogin">登录</a></p>
@@ -92,6 +92,10 @@
       }
     },
     methods: {
+      userDeal(){
+        console.log(1)
+        this.$router.push({name:'UserDeal'})
+      },
       //点击验证码
       VerificationCode(){
         if (!this.register.phone) {

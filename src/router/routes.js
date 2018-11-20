@@ -108,6 +108,12 @@ export default [
     name: 'UserFeedback',
     component: getComponent('UserFeedback')
   },
+  //用户反馈
+  {
+    path: '/userDeal',
+    name: 'UserDeal',
+    component: getComponent('userDeal')
+  },
   //我的守护者
   {
     path: '/myGuardian',

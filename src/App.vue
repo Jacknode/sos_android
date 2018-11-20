@@ -51,6 +51,8 @@
 //          this.$router.push({name:'Register'})
         }else if(to.name=='Login' && from.name=='Register'){
 //          this.$router.push({name:'Login'})
+        }else if(to.name=='UserDeal'){
+
         }else{
           if(!this.userInfo.sm_ui_ID){
             this.$router.push({name:'Login'})
